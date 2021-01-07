@@ -1,0 +1,112 @@
+{
+    "SerializableEvent": [
+        {
+            "name": "Evento 1",
+            "id": 0,
+            "image_id": 0,
+            "text": "Texto de prueba para ver si funciona",
+            "SerializableAnswer": [
+                {
+                    "text": "opcion 0",
+                    "icon": 0,
+                    "next_event": 1,
+                    "SerializableStat": [
+                        {
+                            "stat_id": 0,
+                            "stat_value": 1.0
+                        },
+                        {
+                            "stat_id": 1,
+                            "stat_value": 2.0
+                        }
+                    ]
+                },
+                {
+                    "text": "opcion 1",
+                    "icon": 1,
+                    "next_event": 1,
+                    "SerializableStat": [
+                        {
+                            "stat_id": 0,
+                            "stat_value": 1.0
+                        },
+                        {
+                            "stat_id": 1,
+                            "stat_value": 2.0
+                        }
+                    ]
+                },
+                {
+                    "text": "opcion 2",
+                    "icon": 2,
+                    "next_event": 1,
+                    "SerializableStat": [
+                        {
+                            "stat_id": 0,
+                            "stat_value": 1.0
+                        },
+                        {
+                            "stat_id": 1,
+                            "stat_value": 2.0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Evento 2",
+            "id": 1,
+            "image_id": 0,
+            "text": "Texto de prueba para ver si enlaza con la siguiente opcion",
+            "SerializableAnswer": [
+                {
+                    "text": "end game",
+                    "icon": 0,
+                    "next_event": 0,
+                    "SerializableStat": [
+                        {
+                            "stat_id": 0,
+                            "stat_value": 1.0
+                        },
+                        {
+                            "stat_id": 1,
+                            "stat_value": 2.0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Evento 3",
+            "id": 2,
+            "image_id": 0,
+            "text": "fafsfsafasfsafa",
+            "SerializableAnswer": [
+                {
+                    "text": "opcion 0",
+                    "icon": 0,
+                    "next_event": 1,
+                    "SerializableStat": []
+                },
+                {
+                    "text": "opcion 1",
+                    "icon": 0,
+                    "next_event": 1,
+                    "SerializableStat": []
+                },
+                {
+                    "text": "opcion 2",
+                    "icon": 0,
+                    "next_event": 1,
+                    "SerializableStat": []
+                },
+                {
+                    "text": "fasfasfas",
+                    "icon": 0,
+                    "next_event": 0,
+                    "SerializableStat": []
+                }
+            ]
+        }
+    ]
+}
