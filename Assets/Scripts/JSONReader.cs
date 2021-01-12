@@ -48,10 +48,15 @@ public class JSONReader : MonoBehaviour
     public EventList eventList = new EventList();
     // Start is called before the first frame update
 
+
     public string LoadResourceTextfile(string path)
     {
-
+    #if UNITY_ANDROID
+            string filePath = Application.persistentDataPath+"/Json/" + path.Replace(".json", "");
+    #endif
+    #if UNITY_STANDALONE
         string filePath = "Json/" + path.Replace(".json", "");
+    #endif
         Debug.Log(filePath);
         TextAsset targetFile = Resources.Load<TextAsset>(filePath);
         Debug.Log(targetFile.text);
@@ -77,17 +82,15 @@ public class JSONReader : MonoBehaviour
         Debug.Log("//////////SAVED JSON////////////////");
         Debug.Log(tempText);
         Debug.Log("////////////////////////////////////");
-        FileStream file;
-        string destination = "Assets/Resources/Json/" + jsonName + "_B.json";
-        //if (File.Exists(destination)) 
+    #if UNITY_ANDROID
+        string destination = Application.persistentDataPath+"/Json/" + jsonName + ".json";
+    #endif
+    #if UNITY_STANDALONE
+        string destination =  "Json/" + jsonName + ".json";
+    #endif
         Debug.Log(destination);
-        //file = File.OpenWrite(destination);
-        //else file = File.Create(destination);
         File.WriteAllText(destination, tempText);
-       // BinaryFormatter bf = new BinaryFormatter();
-       // bf.Serialize(file, tempText);
-        
-        //file.Close();
+
     }
     void PrintDebugEvent()
     {
