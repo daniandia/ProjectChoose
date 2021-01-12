@@ -9,10 +9,12 @@ using UnityEngine;
 public struct SerializableStat {
     public int stat_id;
     public float stat_value;
+    public float odds;
 }
 [System.Serializable]
 public class SerializableAnswer
 {
+    public string name;
     public string text;
     public int icon;
     public int next_event;
@@ -20,6 +22,8 @@ public class SerializableAnswer
     public SerializableAnswer()
     {
         SerializableStat = new List<SerializableStat>();
+        name = "none";
+        text = "none";
     }
 }
 [System.Serializable]
@@ -33,6 +37,8 @@ public class SerializableEvent {
     public SerializableEvent()
     {
         SerializableAnswer = new List<SerializableAnswer>();
+        name = "none";
+        text = "none";
     }
 }
 
