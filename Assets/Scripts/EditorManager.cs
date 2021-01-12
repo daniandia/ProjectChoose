@@ -7,7 +7,12 @@ using UnityEngine;
 
 public class EditorManager : MonoBehaviour
 {
-    //Public variables, external editor references
+    [Header("Panel references")]
+    public GameObject eventsPanel;
+    public GameObject propertiesPanel;
+    public UnityEngine.UI.Button eventsButton;
+    public UnityEngine.UI.Button propsButton;
+
     [Header("Event layout references")]
     public UnityEngine.UI.Dropdown ddList;
     public UnityEngine.UI.InputField mainText;
@@ -33,6 +38,7 @@ public class EditorManager : MonoBehaviour
         eventList = jsonReader.eventList;
         InitEventDDL();
         DoSelectOptionDDL();
+        ShowEventPanel();
     }
 
     /// <EVENT RELATED CODE>
@@ -202,5 +208,20 @@ public class EditorManager : MonoBehaviour
     public void ReloadJSON()
     {
 
+    }
+    /// <PANEL RELATED CODE>
+    public void ShowEventPanel()
+    {
+        eventsButton.enabled = false;
+        propsButton.enabled = true;
+        eventsPanel.SetActive(true);
+        propertiesPanel.SetActive(false);
+    }
+    public void ShowPropertiesPanel()
+    {
+        eventsButton.enabled = true;
+        propsButton.enabled = false;
+        eventsPanel.SetActive(false);
+        propertiesPanel.SetActive(true);
     }
 }

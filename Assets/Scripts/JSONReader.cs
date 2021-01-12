@@ -4,10 +4,21 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-
+[System.Serializable]
+public struct Property
+{
+    public string property_name;
+    public int initial_value;
+    public string description;
+}
+[System.Serializable]
+public struct PropertyList
+{
+    public List<Property> Property;
+}
 [System.Serializable]
 public struct SerializableStat {
-    public int stat_id;
+    public int stat_id; //Reference to property ID
     public float stat_value;
     public float odds;
 }
@@ -49,11 +60,9 @@ public class EventList {
 
 public class JSONReader : MonoBehaviour
 {
-    //public TextAsset jsonToLoad;
     public string jsonName;
     public EventList eventList = new EventList();
-    // Start is called before the first frame update
-
+    public PropertyList propList = new PropertyList();
 
     public string LoadResourceTextfile(string path)
     {
@@ -78,8 +87,6 @@ public class JSONReader : MonoBehaviour
             Debug.Log(ex.Message);
             return;
         }
-        //Debug.Log(jsonToLoad.text);
-        //PrintDebugEvent();
     }
     // Update is called once per frame
     public void SaveJSON()
