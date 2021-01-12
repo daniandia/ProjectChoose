@@ -67,7 +67,7 @@ public class EditorManager : MonoBehaviour
         List<string> answerNameList = new List<string>();
         for (int i = 0; i < answers.Count; i++)
         {
-            answerNameList.Add(answers[i].text);
+            answerNameList.Add(answers[i].name);
         }
         answerNameList.Add(" NEW ");
         answersDDL.AddOptions(answerNameList);
@@ -161,7 +161,39 @@ public class EditorManager : MonoBehaviour
         }
         answerLinkDDL.AddOptions(optList);
     }
-
+    //Checks if the name of the answer exits and saves it as new if necessary
+    public void SaveCurrentAnswer() {
+        SerializableEvent tEvent = eventList.SerializableEvent[ddList.value];
+        for (int i=0; i < tEvent.SerializableAnswer.Count; i++) {
+            if( tEvent.SerializableAnswer[i].name == answerName.text)
+            {
+                //Save as old answer
+                tEvent.SerializableAnswer[i].text = answerText.text;
+                tEvent.SerializableAnswer[i].next_event = answerLinkDDL.value;
+                return;
+            }
+        }
+        //Save as new answer
+        SerializableAnswer tAnswer = new SerializableAnswer();
+        tAnswer.name = answerName.text;
+        tAnswer.text = answerText.text;
+        tAnswer.next_event = answerLinkDDL.value;
+        tEvent.SerializableAnswer.Add(tAnswer);
+        FillAnswerPanel(tEvent.SerializableAnswer);
+    }
+    //Deletes the current answer
+    public void DeleteCurrentAnswer()
+    {
+        SerializableEvent tEvent = eventList.SerializableEvent[ddList.value];
+        for (int i = 0; i < tEvent.SerializableAnswer.Count; i++)
+        {
+            if (tEvent.SerializableAnswer[i].name == answerName.text)
+            {
+                tEvent.SerializableAnswer.RemoveAt(i);
+                FillAnswerPanel(tEvent.SerializableAnswer);
+            }
+        }
+    }
     /// <JSON RELATED CODE>
     public void ExportJSON()
     {
