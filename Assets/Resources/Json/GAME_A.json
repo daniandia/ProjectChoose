@@ -71,10 +71,6 @@
                   {
                     "stat_id": 0,
                     "stat_value": 1.0
-                  },
-                  {
-                    "stat_id": 1,
-                    "stat_value": 2.0
                   }
                 ]
               }

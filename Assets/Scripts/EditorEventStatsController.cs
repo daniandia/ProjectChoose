@@ -33,6 +33,7 @@ public class EditorEventStatsController : MonoBehaviour
         }
         propsStrings.Add("NONE");
         propsDDL.AddOptions(propsStrings);
+        SelectNewProperty();
     }
     public void SelectNewProperty()
     {
@@ -94,7 +95,7 @@ public class EditorEventStatsController : MonoBehaviour
     }
     public void ExportPropsJSON()
     {
-
+        jsonReader.SavePropsJSON();
     }
 
 

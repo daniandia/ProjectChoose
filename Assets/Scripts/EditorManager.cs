@@ -35,6 +35,7 @@ public class EditorManager : MonoBehaviour
         jsonReader = GetComponent<JSONReader>();
         // Reads and fills the eventList structure
         jsonReader.LoadGameJSON();
+        jsonReader.LoadStatJSON();
         eventList = jsonReader.eventList;
         InitEventDDL();
         DoSelectOptionDDL();

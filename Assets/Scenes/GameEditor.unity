@@ -7581,8 +7581,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1729795198}
-        m_MethodName: DoSelectOptionDDL
+      - m_Target: {fileID: 1729795201}
+        m_MethodName: SelectNewProperty
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8030,7 +8030,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1417436501}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1729795201}
+        m_MethodName: ExportPropsJSON
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1417436501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9898,10 +9909,10 @@ MonoBehaviour:
   valueInput: {fileID: 862891412}
   descriptionInput: {fileID: 2008352992}
   propsDDL: {fileID: 1335701657}
-  pName: {fileID: 0}
-  pVal: {fileID: 0}
-  pDesc: {fileID: 0}
-  pRefs: {fileID: 0}
+  pName: {fileID: 1358562193}
+  pVal: {fileID: 1537472907}
+  pDesc: {fileID: 1251603551}
+  pRefs: {fileID: 1321434828}
 --- !u!1 &1729803461
 GameObject:
   m_ObjectHideFlags: 0

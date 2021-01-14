@@ -1,0 +1,14 @@
+{
+    "Property": [
+        {
+            "property_name": "coin",
+            "initial_value": 0,
+            "description": "Toss a coin to your witcher"
+        },
+        {
+            "property_name": "culos nazis",
+            "initial_value": 1000,
+            "description": "los culos arios son lo mejor"
+        }
+    ]
+}

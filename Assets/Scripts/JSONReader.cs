@@ -72,7 +72,7 @@ public class JSONReader : MonoBehaviour
     #if UNITY_STANDALONE
         string filePath = "Json/" + path.Replace(".json", "");
     #endif
-        Debug.Log(filePath);
+        Debug.Log("LOAD PATH : "+filePath);
         TextAsset targetFile = Resources.Load<TextAsset>(filePath);
         Debug.Log(targetFile.text);
         return targetFile.text;
@@ -84,7 +84,18 @@ public class JSONReader : MonoBehaviour
             eventList = JsonUtility.FromJson<EventList>(LoadResourceTextfile(jsonName));
         }catch(Exception ex)
         {
-            Debug.Log(ex.Message);
+            Debug.Log("EVENTS JSON : " + ex.Message);
+            return;
+        }
+    }
+    public void LoadStatJSON() {
+        try
+        {
+            propList = JsonUtility.FromJson<PropertyList>(LoadResourceTextfile("PROPS_"+jsonName));
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("PROPERTIES JSON : "+ex.Message);
             return;
         }
     }
@@ -99,11 +110,25 @@ public class JSONReader : MonoBehaviour
         string destination = Application.persistentDataPath+"/Json/" + jsonName + ".json";
     #endif
     #if UNITY_STANDALONE
-        string destination =  "Json/" + jsonName + ".json";
+        string destination =  "Assets/Resources/Json/" + jsonName + ".json";
     #endif
-        Debug.Log(destination);
+        Debug.Log("SAVE PATH EVENT JSON "+destination);
         File.WriteAllText(destination, tempText);
-
+    }
+    public void SavePropsJSON()
+    {
+        string tempText = JsonUtility.ToJson(propList, true);
+        Debug.Log("//////////SAVED PROPS JSON////////////////");
+        Debug.Log(tempText);
+        Debug.Log("////////////////////////////////////");
+    #if UNITY_ANDROID
+        string destination = Application.persistentDataPath+"/Json/PROPS_" + jsonName + ".json";
+    #endif
+    #if UNITY_STANDALONE
+        string destination = "Assets/Resources/Json/PROPS_" + jsonName + ".json";
+    #endif
+        Debug.Log("SAVE PATH PROP JSON " + destination);
+        File.WriteAllText(destination, tempText);
     }
     void PrintDebugEvent()
     {
