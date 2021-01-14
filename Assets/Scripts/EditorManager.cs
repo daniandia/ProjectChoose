@@ -24,7 +24,10 @@ public class EditorManager : MonoBehaviour
     public UnityEngine.UI.InputField answerText;
     public UnityEngine.UI.Dropdown answerLinkDDL;
 
-    [Header("Effect layout references")]
+    [Header("Property layout references")]
+    public UnityEngine.UI.Dropdown propertiesDDL;
+    public UnityEngine.UI.Text propsListText;
+    public UnityEngine.UI.Button clearPropsBtn;
 
     //Internal variables
     JSONReader jsonReader; 
@@ -167,6 +170,7 @@ public class EditorManager : MonoBehaviour
             optList.Add(eventList.SerializableEvent[i].name);
         }
         answerLinkDDL.AddOptions(optList);
+        FillPropertiesPanel();
     }
     //Checks if the name of the answer exits and saves it as new if necessary
     public void SaveCurrentAnswer() {
@@ -189,6 +193,16 @@ public class EditorManager : MonoBehaviour
         FillAnswerPanel(tEvent.SerializableAnswer);
     }
     //Deletes the current answer
+    void FillPropertiesPanel()
+    {
+        propsListText.text = "";
+         List<SerializableStat> SerializableStat = eventList.SerializableEvent[ddList.value].SerializableAnswer[answersDDL.value].SerializableStat;
+         for(int i = 0; i< SerializableStat.Count; i++)
+        {
+            propsListText.text += "" + jsonReader.propList.Property[SerializableStat[i].stat_id].property_name + " MODIF: " + SerializableStat[i].stat_value + " ODDS: " +SerializableStat[i].odds + " \n";
+        }
+       
+    }
     public void DeleteCurrentAnswer()
     {
         SerializableEvent tEvent = eventList.SerializableEvent[ddList.value];

@@ -21,6 +21,7 @@ public struct SerializableStat {
     public int stat_id; //Reference to property ID
     public float stat_value;
     public float odds;
+
 }
 [System.Serializable]
 public class SerializableAnswer
