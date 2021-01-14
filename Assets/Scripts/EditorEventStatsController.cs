@@ -8,36 +8,81 @@ public class EditorEventStatsController : MonoBehaviour
     public UnityEngine.UI.InputField nameInput;
     public UnityEngine.UI.InputField valueInput;
     public UnityEngine.UI.InputField descriptionInput;
-    public Transform propListPanel;
-    
-    public GameObject instantiableProperty;
-    [Header("Visual editor offsets")]
-    public Vector2 layoutOffset = new Vector2(0f, -90f);
-    const int maxrows = 10;
-    List<GameObject> propsList = new List<GameObject>();
-
+    [Header("Property list  references")]
+    public UnityEngine.UI.Dropdown propsDDL;
+    public UnityEngine.UI.Text pName;
+    public UnityEngine.UI.Text pVal;
+    public UnityEngine.UI.Text pDesc;
+    public UnityEngine.UI.Text pRefs;
     JSONReader jsonReader;
+
 
     void Start()
     {
         jsonReader = GetComponent<JSONReader>();
+        InitPropertyList();
     }
     void InitPropertyList()
     {
-        for (int i = 0; i < propsList.Count; i++)
+        propsDDL.ClearOptions();
+        List<string> propsStrings = new List<string>();
+        PropertyList tProps = jsonReader.propList;
+        for (int i = 0; i < tProps.Property.Count; i++)
         {
-            Destroy(propsList[i]);
+            propsStrings.Add(tProps.Property[i].property_name);
         }
-        propsList.Clear();
-        for (int i=0; i < jsonReader.propList.Property.Count; i++)
-        {
-            Property tProp = jsonReader.propList.Property[i];
-            GameObject tGO = Instantiate(instantiableProperty);
-            tGO.transform.parent = propListPanel;
-            tGO.GetComponent<EditorProperty>().Initialise(tProp.property_name,tProp.description,tProp.initial_value, new Vector3((int)(i/maxrows)*layoutOffset.x, (i%maxrows) * layoutOffset.y, 0f)); 
-            propsList.Add(tGO);
-        }
+        propsStrings.Add("NONE");
+        propsDDL.AddOptions(propsStrings);
     }
+    public void SelectNewProperty()
+    {
+        Property prop = jsonReader.propList.Property[propsDDL.value];
+        pName.text = prop.property_name;
+        pVal.text = ""+prop.initial_value;
+        pDesc.text = prop.description;
+        string referencesInEvents = "";
+        for(int i = 0; i < jsonReader.eventList.SerializableEvent.Count; i++)
+        {
+            for (int j=0;j< jsonReader.eventList.SerializableEvent[i].SerializableAnswer.Count; j++)
+            {
+                for(int k = 0;k < jsonReader.eventList.SerializableEvent[i].SerializableAnswer[j].SerializableStat.Count; k++){
+                    if (jsonReader.eventList.SerializableEvent[i].SerializableAnswer[j].SerializableStat[k].stat_id == propsDDL.value)
+                    {
+                        referencesInEvents += "" + jsonReader.eventList.SerializableEvent[i].name + " - " + jsonReader.eventList.SerializableEvent[i].SerializableAnswer[j].name + " : " + jsonReader.eventList.SerializableEvent[i].SerializableAnswer[j].SerializableStat[k].stat_value + " \n";
+                    }
+                }
+            }
+        }
+        pRefs.text = referencesInEvents;
+    }
+
+    public void DeleteProperty()
+    {
+        if (propsDDL.options.Count == 0)
+            return;
+        for (int i = 0; i < jsonReader.eventList.SerializableEvent.Count; i++)
+        {
+            for (int j = 0; j < jsonReader.eventList.SerializableEvent[i].SerializableAnswer.Count; j++)
+            {
+                for (int k = 0; k < jsonReader.eventList.SerializableEvent[i].SerializableAnswer[j].SerializableStat.Count; k++)
+                { 
+                    SerializableStat tStat = jsonReader.eventList.SerializableEvent[i].SerializableAnswer[j].SerializableStat[k];
+                    if (tStat.stat_id == propsDDL.value)
+                    {
+                        tStat.stat_id = -1;
+                    }
+                    if (tStat.stat_id > propsDDL.value)
+                    {
+                        tStat.stat_id--;
+                    }
+                    jsonReader.eventList.SerializableEvent[i].SerializableAnswer[j].SerializableStat[k] = tStat;
+                }
+            }
+        }
+        jsonReader.propList.Property.RemoveAt(propsDDL.value);
+        InitPropertyList();
+    }
+
     public void CreateNewProperty()
     {
         Property tProperty;
