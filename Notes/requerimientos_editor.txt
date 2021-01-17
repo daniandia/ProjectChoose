@@ -1,0 +1,21 @@
+Por orden de importancia
+------------------------
+
+- Un editor de atributos donde se puede añadir desde "armadura" hasta "el perro rojo te ha mirado". Los atributos tienen un tipo (int, float, boolean es suficiente), un valor de inicialización, un mínimo (opcional) y un máximo. 
+- Eventos invisibles *o inactivos* que sólo son visibles como opciones en el ABCD del evento padre si ciertos atributos se cumplen
+	- La capacidad de definir esas condiciones
+- Una forma de definir "triggers" para los atributos que tengan precedencia a la resolución del evento. Por ejemplo, "salud" es un atributo que empieza por defecto en 10, máximo 10, mínimo 0. Si llega a 0 le lanza el trigger "muerte".
+- Eventos con resoluciones condicionales. Por ejemplo, si el atributo "agilidad" es superior a 4, la resolución sucede en el evento X, de lo contrario sucede en el evento Y.
+- Eventos con efectos en los atributos. Por ejemplo, el evento X sucede, +2 al atributo "alcoholismo"
+- Eventos con efectos aleatorios en los atributos. Por ejemplo, el evento X sucede, 10% de perder -1 de cordura, 30% de -3 de cordura, 60% de que no suceda nada. 
+- Eventos con resoluciones aleatorias sin influencia de los atributos.
+- (Este el que tuve que resolver con una función custom en el evento). Resoluciones de eventos semialeatorios, dependiendo de varios atributos y aleatoriedad.
+- Un script que pueda ejecutar desde el editor que me ayude a encontrar defectos, como: 
+	- Me mueva al siguiente evento que no tenga texto 
+	- que tenga un TODO sin acabar 
+	- o referencias a eventos inexistentes 
+- Una forma de ver todos los eventos en un árbol
+
+
+
+
