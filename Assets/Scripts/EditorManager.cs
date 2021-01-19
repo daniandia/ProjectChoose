@@ -96,17 +96,6 @@ public class EditorManager : MonoBehaviour
             eventToSave.id = eventList.SerializableEvent.Count;
             eventToSave.text = mainText.text;
             eventToSave.name = nameText.text;
-            /*for(int i = 0; i< answers.Length; i++)
-            {
-                if (answers[i].selector.isOn)
-                {
-                    SerializableAnswer tAnswer = new SerializableAnswer();
-                    tAnswer.text = answers[i].text.text;
-                    tAnswer.next_event = answers[i].dList.value;
-                    eventToSave.SerializableAnswer.Add(tAnswer);
-                    //PROPERTIES MISSING
-                }
-            }*/
             AddAnswersToList();
             eventList.SerializableEvent.Add(eventToSave);
             InitEventDDL();
@@ -228,6 +217,8 @@ public class EditorManager : MonoBehaviour
     void FillPropertiesPanel()
     {
         propsListText.text = "";
+        Debug.Log("Debug: EVENTS : " + ddList.value +" ANSWERS : " + answersDDL.value);
+        if (eventList.SerializableEvent[ddList.value].SerializableAnswer.Count == 0) return;
          List<SerializableStat> SerializableStat = eventList.SerializableEvent[ddList.value].SerializableAnswer[answersDDL.value].SerializableStat;
          for(int i = 0; i< SerializableStat.Count; i++)
         {
@@ -267,7 +258,7 @@ public class EditorManager : MonoBehaviour
     {
         if (UnityEditor.EditorUtility.DisplayDialog("JSON SAVED", "JSON file is now up to date", "OK")) 
         {
-
+            jsonReader.eventList = eventList;
             jsonReader.SaveJSON();
         }
     }
@@ -282,6 +273,7 @@ public class EditorManager : MonoBehaviour
         propsButton.enabled = true;
         eventsPanel.SetActive(true);
         propertiesPanel.SetActive(false);
+        FillPropertiesPanel();
     }
     public void ShowPropertiesPanel()
     {

@@ -123,6 +123,21 @@
                     "SerializableStat": []
                 }
             ]
+        },
+        {
+            "name": "Evento YEAH MAN",
+            "id": 3,
+            "image_id": 0,
+            "text": "ESO",
+            "SerializableAnswer": [
+                {
+                    "name": "PRIMERA SEPUESTA",
+                    "text": "NEW TEXT",
+                    "icon": 0,
+                    "next_event": 2,
+                    "SerializableStat": []
+                }
+            ]
         }
     ]
 }

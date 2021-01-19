@@ -9,6 +9,11 @@
             "property_name": "culos nazis",
             "initial_value": 1000,
             "description": "los culos arios son lo mejor"
+        },
+        {
+            "property_name": "random prop",
+            "initial_value": 100,
+            "description": "esta s una random prop y no se ni para que necesito la descripcion"
         }
     ]
 }
