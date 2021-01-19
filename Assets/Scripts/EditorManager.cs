@@ -123,10 +123,13 @@ public class EditorManager : MonoBehaviour
     //Deletes the current event and updates the references to this one in other events
     public void DeleteEvent()
     {
-        ResetAllReferences(ddList.value);
-        eventList.SerializableEvent.Remove(eventList.SerializableEvent[ddList.value]);
-        InitEventDDL();
-        DoSelectOptionDDL();
+        if (UnityEditor.EditorUtility.DisplayDialog("DELETE event: " + nameText.text, "The current event and ALL its references will be deleted", "OK", "Cancel"))
+        {
+            ResetAllReferences(ddList.value);
+            eventList.SerializableEvent.Remove(eventList.SerializableEvent[ddList.value]);
+            InitEventDDL();
+            DoSelectOptionDDL();
+        }
     }
     //Updates the references to the deleted event
     //CRITICAL: This solution might not work on every case, need to test
