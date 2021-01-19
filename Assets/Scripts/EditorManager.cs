@@ -29,6 +29,10 @@ public class EditorManager : MonoBehaviour
     public UnityEngine.UI.Text propsListText;
     public UnityEngine.UI.Button clearPropsBtn;
 
+    [Header("Property input references")]
+    public UnityEngine.UI.InputField propValue;
+    public UnityEngine.UI.InputField propOdds;
+
     //Internal variables
     JSONReader jsonReader; 
     EventList eventList ;  //The event structure to read/write
@@ -86,35 +90,41 @@ public class EditorManager : MonoBehaviour
     //Saves the creted event as a new one
    public void AddEventAsNew()
     {
-        SerializableEvent eventToSave = new SerializableEvent();
-        eventToSave.id = eventList.SerializableEvent.Count;
-        eventToSave.text = mainText.text;
-        eventToSave.name = nameText.text;
-        /*for(int i = 0; i< answers.Length; i++)
+        if (UnityEditor.EditorUtility.DisplayDialog("Event  created : " + nameText.text, mainText.text, "OK", "Cancel"))
         {
-            if (answers[i].selector.isOn)
+            SerializableEvent eventToSave = new SerializableEvent();
+            eventToSave.id = eventList.SerializableEvent.Count;
+            eventToSave.text = mainText.text;
+            eventToSave.name = nameText.text;
+            /*for(int i = 0; i< answers.Length; i++)
             {
-                SerializableAnswer tAnswer = new SerializableAnswer();
-                tAnswer.text = answers[i].text.text;
-                tAnswer.next_event = answers[i].dList.value;
-                eventToSave.SerializableAnswer.Add(tAnswer);
-                //PROPERTIES MISSING
-            }
-        }*/
-        AddAnswersToList();
-        eventList.SerializableEvent.Add(eventToSave);
-        InitEventDDL();
+                if (answers[i].selector.isOn)
+                {
+                    SerializableAnswer tAnswer = new SerializableAnswer();
+                    tAnswer.text = answers[i].text.text;
+                    tAnswer.next_event = answers[i].dList.value;
+                    eventToSave.SerializableAnswer.Add(tAnswer);
+                    //PROPERTIES MISSING
+                }
+            }*/
+            AddAnswersToList();
+            eventList.SerializableEvent.Add(eventToSave);
+            InitEventDDL();
+        }
     }
     //Saves the actual event (does not create new events)
     public void SaveEvent()
     {
-        SerializableEvent eventToSave = new SerializableEvent();
-        eventToSave.id = eventList.SerializableEvent.Count;
-        eventToSave.text = mainText.text;
-        eventToSave.name = nameText.text;
-        AddAnswersToList();
-        eventList.SerializableEvent[ddList.value] = eventToSave;
-        InitEventDDL();
+        if (UnityEditor.EditorUtility.DisplayDialog("Event  saved : "+ nameText.text, mainText.text , "OK", "Cancel"))
+        {
+            SerializableEvent eventToSave = new SerializableEvent();
+            eventToSave.id = eventList.SerializableEvent.Count;
+            eventToSave.text = mainText.text;
+            eventToSave.name = nameText.text;
+            AddAnswersToList();
+            eventList.SerializableEvent[ddList.value] = eventToSave;
+            InitEventDDL();
+        }
     }
     //When saving or creating a new event fills the answer structure
     void AddAnswersToList()
@@ -171,28 +181,50 @@ public class EditorManager : MonoBehaviour
         }
         answerLinkDDL.AddOptions(optList);
         FillPropertiesPanel();
+        FillPropertiesDLL();
     }
     //Checks if the name of the answer exits and saves it as new if necessary
-    public void SaveCurrentAnswer() {
-        SerializableEvent tEvent = eventList.SerializableEvent[ddList.value];
-        for (int i=0; i < tEvent.SerializableAnswer.Count; i++) {
-            if( tEvent.SerializableAnswer[i].name == answerName.text)
+    public void SaveCurrentAnswer()
+    {
+      
+            SerializableEvent tEvent = eventList.SerializableEvent[ddList.value];
+            for (int i = 0; i < tEvent.SerializableAnswer.Count; i++)
             {
-                //Save as old answer
-                tEvent.SerializableAnswer[i].text = answerText.text;
-                tEvent.SerializableAnswer[i].next_event = answerLinkDDL.value;
-                return;
+                if (tEvent.SerializableAnswer[i].name == answerName.text)
+                {
+                 if (UnityEditor.EditorUtility.DisplayDialog("Answer edited : "+ answerName.text, answerText.text+"\n Link:" + answerLinkDDL.value, "OK", "Cancel"))
+                    {
+                        //Save as old answer
+                        tEvent.SerializableAnswer[i].text = answerText.text;
+                        tEvent.SerializableAnswer[i].next_event = answerLinkDDL.value;
+                    }
+                    return;
+                }
             }
+        if (UnityEditor.EditorUtility.DisplayDialog("NEW answer: "+answerName.text,answerText.text+"\n Link:"+ answerLinkDDL.value, "OK", "Cancel"))
+        {
+            //Save as new answer
+            SerializableAnswer tAnswer = new SerializableAnswer();
+            tAnswer.name = answerName.text;
+            tAnswer.text = answerText.text;
+            tAnswer.next_event = answerLinkDDL.value;
+            tEvent.SerializableAnswer.Add(tAnswer);
+            FillAnswerPanel(tEvent.SerializableAnswer);
         }
-        //Save as new answer
-        SerializableAnswer tAnswer = new SerializableAnswer();
-        tAnswer.name = answerName.text;
-        tAnswer.text = answerText.text;
-        tAnswer.next_event = answerLinkDDL.value;
-        tEvent.SerializableAnswer.Add(tAnswer);
-        FillAnswerPanel(tEvent.SerializableAnswer);
     }
-    //Deletes the current answer
+    void FillPropertiesDLL()
+    {
+        propertiesDDL.ClearOptions();
+        List<string> propsStrings = new List<string>();
+        PropertyList tProps = jsonReader.propList;
+        for (int i = 0; i < tProps.Property.Count; i++)
+        {
+            propsStrings.Add(tProps.Property[i].property_name);
+        }
+        propsStrings.Add("NONE");
+        propertiesDDL.AddOptions(propsStrings);
+
+    }
     void FillPropertiesPanel()
     {
         propsListText.text = "";
@@ -203,22 +235,41 @@ public class EditorManager : MonoBehaviour
         }
        
     }
+
+    public void AddNewPropertyToList()
+    {
+        if( UnityEditor.EditorUtility.DisplayDialog("New property added to event ", jsonReader.propList.Property[propertiesDDL.value].property_name + " modified by " + propValue.text + " with a chance of %" + propOdds.text, "OK", "Cancel")){
+            SerializableStat tempStat;
+            tempStat.odds = int.Parse(propOdds.text);
+            tempStat.stat_value = int.Parse(propValue.text);
+            tempStat.stat_id = propertiesDDL.value;
+            jsonReader.eventList.SerializableEvent[ddList.value].SerializableAnswer[answersDDL.value].SerializableStat.Add(tempStat); 
+        }
+        FillPropertiesPanel();
+    }
     public void DeleteCurrentAnswer()
     {
-        SerializableEvent tEvent = eventList.SerializableEvent[ddList.value];
-        for (int i = 0; i < tEvent.SerializableAnswer.Count; i++)
+        if (UnityEditor.EditorUtility.DisplayDialog("DELETE answer: "+ answerName.text, answerText.text+"\n Link:" + answerLinkDDL.value, "OK", "Cancel"))
         {
-            if (tEvent.SerializableAnswer[i].name == answerName.text)
+            SerializableEvent tEvent = eventList.SerializableEvent[ddList.value];
+            for (int i = 0; i < tEvent.SerializableAnswer.Count; i++)
             {
-                tEvent.SerializableAnswer.RemoveAt(i);
-                FillAnswerPanel(tEvent.SerializableAnswer);
+                if (tEvent.SerializableAnswer[i].name == answerName.text)
+                {
+                    tEvent.SerializableAnswer.RemoveAt(i);
+                    FillAnswerPanel(tEvent.SerializableAnswer);
+                }
             }
         }
     }
     /// <JSON RELATED CODE>
     public void ExportJSON()
     {
-        jsonReader.SaveJSON();
+        if (UnityEditor.EditorUtility.DisplayDialog("JSON SAVED", "JSON file is now up to date", "OK")) 
+        {
+
+            jsonReader.SaveJSON();
+        }
     }
     public void ReloadJSON()
     {

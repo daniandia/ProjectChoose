@@ -6,54 +6,65 @@
             "image_id": 0,
             "text": "Texto de prueba para ver si funciona",
             "SerializableAnswer": [
-              {
-                "name":  "answer_a",
-                "text": "opcion 0",
-                "icon": 0,
-                "next_event": 1,
-                "SerializableStat": [
-                  {
-                    "stat_id": 0,
-                    "stat_value": 1.0
-                  },
-                  {
-                    "stat_id": 1,
-                    "stat_value": 2.0
-                  }
-                ]
-              },
-              {
-                "name": "answer_b",
-                "text": "opcion 1",
-                "icon": 1,
-                "next_event": 1,
-                "SerializableStat": [
-                  {
-                    "stat_id": 0,
-                    "stat_value": 1.0
-                  },
-                  {
-                    "stat_id": 1,
-                    "stat_value": 2.0
-                  }
-                ]
-              },
-              {
-                "name": "answer_c",
-                "text": "opcion 2",
-                "icon": 2,
-                "next_event": 1,
-                "SerializableStat": [
-                  {
-                    "stat_id": 0,
-                    "stat_value": 1.0
-                  },
-                  {
-                    "stat_id": 1,
-                    "stat_value": 2.0
-                  }
-                ]
-              }
+                {
+                    "name": "answer_a",
+                    "text": "opcion 0",
+                    "icon": 0,
+                    "next_event": 1,
+                    "SerializableStat": [
+                        {
+                            "stat_id": 0,
+                            "stat_value": 1.0,
+                            "odds": 0.0
+                        },
+                        {
+                            "stat_id": 1,
+                            "stat_value": 2.0,
+                            "odds": 0.0
+                        },
+                        {
+                            "stat_id": 0,
+                            "stat_value": 22.0,
+                            "odds": 33.0
+                        }
+                    ]
+                },
+                {
+                    "name": "answer_b",
+                    "text": "opcion 1",
+                    "icon": 1,
+                    "next_event": 1,
+                    "SerializableStat": [
+                        {
+                            "stat_id": 0,
+                            "stat_value": 1.0,
+                            "odds": 0.0
+                        },
+                        {
+                            "stat_id": 1,
+                            "stat_value": 2.0,
+                            "odds": 0.0
+                        }
+                    ]
+                },
+                {
+                    "name": "answer_c",
+                    "text": "opcion 2",
+                    "icon": 2,
+                    "next_event": 1,
+                    "SerializableStat": [
+                        {
+                            "stat_id": 0,
+                            "stat_value": 1.0,
+                            "odds": 0.0
+                        },
+                        {
+                            "stat_id": 1,
+                            "stat_value": 2.0,
+                            "odds": 0.0
+                        }
+                    ]
+                }
             ]
         },
         {
@@ -62,18 +73,19 @@
             "image_id": 0,
             "text": "Texto de prueba para ver si enlaza con la siguiente opcion",
             "SerializableAnswer": [
-              {
-                "name": "answer_a",
-                "text": "end game",
-                "icon": 0,
-                "next_event": 0,
-                "SerializableStat": [
-                  {
-                    "stat_id": 0,
-                    "stat_value": 1.0
-                  }
-                ]
-              }
+                {
+                    "name": "answer_a",
+                    "text": "end game",
+                    "icon": 0,
+                    "next_event": 0,
+                    "SerializableStat": [
+                        {
+                            "stat_id": 0,
+                            "stat_value": 1.0,
+                            "odds": 0.0
+                        }
+                    ]
+                }
             ]
         },
         {
@@ -82,34 +94,34 @@
             "image_id": 0,
             "text": "fafsfsafasfsafa",
             "SerializableAnswer": [
-              {
-                "name": "answer_a",
-                "text": "opcion 0",
-                "icon": 0,
-                "next_event": 1,
-                "SerializableStat": []
-              },
-              {
-                "name": "answer_b",
-                "text": "opcion 1",
-                "icon": 0,
-                "next_event": 1,
-                "SerializableStat": []
-              },
-              {
-                "name": "answer_c",
-                "text": "opcion 2",
-                "icon": 0,
-                "next_event": 1,
-                "SerializableStat": []
-              },
-              {
-                "name": "answer_d",
-                "text": "fasfasfas",
-                "icon": 0,
-                "next_event": 0,
-                "SerializableStat": []
-              }
+                {
+                    "name": "answer_a",
+                    "text": "opcion 0",
+                    "icon": 0,
+                    "next_event": 1,
+                    "SerializableStat": []
+                },
+                {
+                    "name": "answer_b",
+                    "text": "opcion 1",
+                    "icon": 0,
+                    "next_event": 1,
+                    "SerializableStat": []
+                },
+                {
+                    "name": "answer_c",
+                    "text": "opcion 2",
+                    "icon": 0,
+                    "next_event": 1,
+                    "SerializableStat": []
+                },
+                {
+                    "name": "answer_d",
+                    "text": "fasfasfas",
+                    "icon": 0,
+                    "next_event": 0,
+                    "SerializableStat": []
+                }
             ]
         }
     ]
