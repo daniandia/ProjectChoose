@@ -132,7 +132,7 @@
             "id": 3,
             "image_id": 0,
             "text": "ESO",
-            "type": 0,
+            "type": 1,
             "SerializableAnswer": [
                 {
                     "name": "PRIMERA SEPUESTA",

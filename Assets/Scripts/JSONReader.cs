@@ -75,13 +75,13 @@ public class JSONReader : MonoBehaviour
 
     public string LoadResourceTextfile(string path)
     {
-    #if UNITY_ANDROID
+#if UNITY_ANDROID
             string filePath = Application.persistentDataPath+"/Json/" + path.Replace(".json", "");
-    #endif
-    #if UNITY_STANDALONE
+#endif
+#if UNITY_STANDALONE
         string filePath = "Json/" + path.Replace(".json", "");
-    #endif
-        Debug.Log("LOAD PATH : "+filePath);
+#endif
+        Debug.Log("LOAD PATH : " + filePath);
         TextAsset targetFile = Resources.Load<TextAsset>(filePath);
         Debug.Log(targetFile.text);
         return targetFile.text;
@@ -91,7 +91,7 @@ public class JSONReader : MonoBehaviour
         try
         {
             eventList = JsonUtility.FromJson<EventList>(LoadResourceTextfile(jsonName));
-        }catch(Exception ex)
+        } catch (Exception ex)
         {
             Debug.Log("EVENTS JSON : " + ex.Message);
             return;
@@ -100,28 +100,28 @@ public class JSONReader : MonoBehaviour
     public void LoadStatJSON() {
         try
         {
-            propList = JsonUtility.FromJson<PropertyList>(LoadResourceTextfile("PROPS_"+jsonName));
+            propList = JsonUtility.FromJson<PropertyList>(LoadResourceTextfile("PROPS_" + jsonName));
         }
         catch (Exception ex)
         {
-            Debug.Log("PROPERTIES JSON : "+ex.Message);
+            Debug.Log("PROPERTIES JSON : " + ex.Message);
             return;
         }
     }
     // Update is called once per frame
     public void SaveJSON()
     {
-        string tempText = JsonUtility.ToJson(eventList,true);
+        string tempText = JsonUtility.ToJson(eventList, true);
         Debug.Log("//////////SAVED JSON////////////////");
         Debug.Log(tempText);
         Debug.Log("////////////////////////////////////");
-    #if UNITY_ANDROID
+#if UNITY_ANDROID
         string destination = Application.persistentDataPath+"/Json/" + jsonName + ".json";
-    #endif
-    #if UNITY_STANDALONE
-        string destination =  "Assets/Resources/Json/" + jsonName + ".json";
-    #endif
-        Debug.Log("SAVE PATH EVENT JSON "+destination);
+#endif
+#if UNITY_STANDALONE
+        string destination = "Assets/Resources/Json/" + jsonName + ".json";
+#endif
+        Debug.Log("SAVE PATH EVENT JSON " + destination);
         File.WriteAllText(destination, tempText);
     }
     public void SavePropsJSON()
@@ -130,12 +130,12 @@ public class JSONReader : MonoBehaviour
         Debug.Log("//////////SAVED PROPS JSON////////////////");
         Debug.Log(tempText);
         Debug.Log("////////////////////////////////////");
-    #if UNITY_ANDROID
+#if UNITY_ANDROID
         string destination = Application.persistentDataPath+"/Json/PROPS_" + jsonName + ".json";
-    #endif
-    #if UNITY_STANDALONE
+#endif
+#if UNITY_STANDALONE
         string destination = "Assets/Resources/Json/PROPS_" + jsonName + ".json";
-    #endif
+#endif
         Debug.Log("SAVE PATH PROP JSON " + destination);
         File.WriteAllText(destination, tempText);
     }
@@ -151,5 +151,12 @@ public class JSONReader : MonoBehaviour
     public SerializableEvent GetActualEvent(int eventId)
     {
         return eventList.SerializableEvent[eventId];
+    }
+
+    public SerializableEvent GetFirstEvent(){
+        for (int i = 0; i < eventList.SerializableEvent.Count; i++)
+            if (eventList.SerializableEvent[i].type == (int)(answerType.START_POINT))
+                return eventList.SerializableEvent[i];
+        return eventList.SerializableEvent[0];
     }
 }

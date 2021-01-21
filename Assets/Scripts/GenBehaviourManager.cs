@@ -11,9 +11,16 @@ public class GenBehaviourManager : MonoBehaviour
     {
         jsonManager = GetComponent<JSONReader>();
         jsonManager.LoadGameJSON();
-        LoadActualEvent();
+        jsonManager.LoadStatJSON();
+        LoadFirstEvent();
     }
     SerializableEvent tEvent;
+
+    private void LoadFirstEvent()
+    {
+        tEvent = jsonManager.GetFirstEvent();
+        SetUpCanvas(tEvent);
+    }
     private void LoadActualEvent()
     {
         tEvent = jsonManager.GetActualEvent(eventId);
