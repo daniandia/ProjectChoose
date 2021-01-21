@@ -245,6 +245,8 @@ public class EditorManager : MonoBehaviour
     void FillPropertiesPanel()
     {
         propsListText.text = "";
+        if (answersDDL.value == eventList.SerializableEvent[ddList.value].SerializableAnswer.Count)
+            return;
         Debug.Log("Debug: EVENTS : " + ddList.value +" ANSWERS : " + answersDDL.value);
         if (eventList.SerializableEvent[ddList.value].SerializableAnswer.Count == 0) return;
          List<SerializableStat> SerializableStat = eventList.SerializableEvent[ddList.value].SerializableAnswer[answersDDL.value].SerializableStat;
