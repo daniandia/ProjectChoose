@@ -12,6 +12,7 @@ public class GenBehaviourManager : MonoBehaviour
         jsonManager = GetComponent<JSONReader>();
         jsonManager.LoadGameJSON();
         jsonManager.LoadStatJSON();
+        InitialiseInGameStats();
         LoadFirstEvent();
     }
     SerializableEvent tEvent;
@@ -38,6 +39,7 @@ public class GenBehaviourManager : MonoBehaviour
         }
         for (int i = tEvent.SerializableAnswer.Count; i < answerTextConts.Length; i++)
             answerTextConts[i].transform.parent.gameObject.SetActive(false);
+        UpdateStatText();
     }
 
     public void SelectOption(int optionId)
@@ -71,5 +73,30 @@ public class GenBehaviourManager : MonoBehaviour
     {
         LoadActualEvent();
         LeanTween.scaleX(backCanvas, 0.9f, scaleInOutSpeeds.y);
+    }
+
+    public  List<SerializableStat> inGameStats;
+    public UnityEngine.UI.Text propsText;
+    void InitialiseInGameStats()
+    {
+        inGameStats = new List<SerializableStat>();
+        int i = 0;
+        foreach(Property tProp in jsonManager.propList.Property)
+        {
+            SerializableStat tStat;
+            tStat.stat_id = i;
+            tStat.stat_value = tProp.initial_value;
+            tStat.odds = 0f;
+            inGameStats.Add(tStat);
+            i++;
+
+        }
+    }
+
+    void UpdateStatText()
+    {
+        propsText.text = "";
+        foreach (SerializableStat tStat in inGameStats)
+            propsText.text += (" - " + jsonManager.propList.Property[tStat.stat_id].property_name + " : " + tStat.stat_value+" \n");
     }
 }
