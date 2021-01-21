@@ -50,6 +50,7 @@ public class GenBehaviourManager : MonoBehaviour
             return;
         }
         ConfirmOption();
+        UpdateStats(tEvent.SerializableAnswer[optionId]);
     }
 
     void EndGame()
@@ -71,8 +72,11 @@ public class GenBehaviourManager : MonoBehaviour
     }
     void RestoreOptionCanvas()
     {
-        LoadActualEvent();
-        LeanTween.scaleX(backCanvas, 0.9f, scaleInOutSpeeds.y);
+        if (CheckAnswerType())
+        {
+            LoadActualEvent();
+            LeanTween.scaleX(backCanvas, 0.9f, scaleInOutSpeeds.y);
+        }
     }
 
     public  List<SerializableStat> inGameStats;
@@ -98,5 +102,29 @@ public class GenBehaviourManager : MonoBehaviour
         propsText.text = "";
         foreach (SerializableStat tStat in inGameStats)
             propsText.text += (" - " + jsonManager.propList.Property[tStat.stat_id].property_name + " : " + tStat.stat_value+" \n");
+    }
+
+    void UpdateStats(SerializableAnswer answer)
+    {
+        foreach(SerializableStat tStat in answer.SerializableStat)
+        {
+            if (Random.Range(0, 100) > tStat.odds)
+            {
+                SerializableStat modif = inGameStats[tStat.stat_id];
+                modif.stat_value += tStat.stat_value;
+                inGameStats[tStat.stat_id] = modif;
+            }
+        }
+        //We should override this function, call another event or something for specific consequences
+    }
+
+    bool CheckAnswerType()
+    {
+        if (tEvent.type == (int)(answerType.END_NODE))
+        {
+            Application.Quit();
+            return false;
+        }
+        return true;
     }
 }
