@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GenBehaviourManager : MonoBehaviour
 {
@@ -36,10 +37,28 @@ public class GenBehaviourManager : MonoBehaviour
         {
             answerTextConts[i].transform.parent.gameObject.SetActive(true);
             answerTextConts[i].text = tEvent.SerializableAnswer[i].text;
+            if(CheckBlockCondition(tEvent.SerializableAnswer[i].blockCondition))
+            {
+                //LockTheAnswer
+                answerTextConts[i].transform.parent.GetComponent<Button>().enabled = false;
+                answerTextConts[i].transform.parent.GetComponent<Image>().color = Color.grey;
+            }
+            else
+            {
+                //Unlock the answer
+                answerTextConts[i].transform.parent.GetComponent<UnityEngine.UI.Button>().enabled = true;
+                answerTextConts[i].transform.parent.GetComponent<Image>().color = Color.white;
+            }
         }
         for (int i = tEvent.SerializableAnswer.Count; i < answerTextConts.Length; i++)
             answerTextConts[i].transform.parent.gameObject.SetActive(false);
         UpdateStatText();
+    }
+
+    bool CheckBlockCondition(SerializableStat tBlock)
+    {
+        if (tBlock.stat_id < 0) return false;
+        return (inGameStats[tBlock.stat_id].stat_value < tBlock.stat_value);
     }
 
     public void SelectOption(int optionId)

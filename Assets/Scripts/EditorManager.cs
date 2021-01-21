@@ -24,6 +24,8 @@ public class EditorManager : MonoBehaviour
     public UnityEngine.UI.InputField answerName;
     public UnityEngine.UI.InputField answerText;
     public UnityEngine.UI.Dropdown answerLinkDDL;
+    public UnityEngine.UI.Dropdown answerBlockDDL;
+    public UnityEngine.UI.InputField answerBlockText;
 
     [Header("Property layout references")]
     public UnityEngine.UI.Dropdown propertiesDDL;
@@ -49,6 +51,7 @@ public class EditorManager : MonoBehaviour
         DoSelectOptionDDL();
         ShowEventPanel();
         InitAnswerTypeDDL();
+        FillBlockerDDL();
     }
     //Init answerTypeDDL
     void InitAnswerTypeDDL()
@@ -168,6 +171,8 @@ public class EditorManager : MonoBehaviour
         if (answersDDL.value >= (answersDDL.options.Count - 1)){
             answerName.text = "NEW NAME";
             answerText.text = "NEW TEXT";
+            answerBlockDDL.value = 0;
+            answerBlockText.text = "0";
             FillAnswerLinkDDL();
             return;
         }
@@ -175,6 +180,8 @@ public class EditorManager : MonoBehaviour
         answerText.text = eventList.SerializableEvent[ddList.value].SerializableAnswer[answersDDL.value].text;
         FillAnswerLinkDDL();
         answerLinkDDL.value = eventList.SerializableEvent[ddList.value].SerializableAnswer[answersDDL.value].next_event;
+        answerBlockDDL.value = eventList.SerializableEvent[ddList.value].SerializableAnswer[answersDDL.value].blockCondition.stat_id + 1;
+        answerBlockText.text = "" +eventList.SerializableEvent[ddList.value].SerializableAnswer[answersDDL.value].blockCondition.stat_value;
     }
     //Fills the destiny DDL with the events in the event structure (can be heavily optimized in terms of performace)
     void FillAnswerLinkDDL()
@@ -203,6 +210,8 @@ public class EditorManager : MonoBehaviour
                         //Save as old answer
                         tEvent.SerializableAnswer[i].text = answerText.text;
                         tEvent.SerializableAnswer[i].next_event = answerLinkDDL.value;
+                        tEvent.SerializableAnswer[i].blockCondition.stat_id = answerBlockDDL.value - 1;
+                        tEvent.SerializableAnswer[i].blockCondition.stat_value = int.Parse(answerBlockText.text);
                     }
                     return;
                 }
@@ -214,6 +223,8 @@ public class EditorManager : MonoBehaviour
             tAnswer.name = answerName.text;
             tAnswer.text = answerText.text;
             tAnswer.next_event = answerLinkDDL.value;
+            tAnswer.blockCondition.stat_id = answerBlockDDL.value - 1;
+            tAnswer.blockCondition.stat_value = int.Parse(answerBlockText.text);
             tEvent.SerializableAnswer.Add(tAnswer);
             FillAnswerPanel(tEvent.SerializableAnswer);
         }
@@ -270,6 +281,21 @@ public class EditorManager : MonoBehaviour
             }
         }
     }
+    /// <ANSWER BLOCK CODE>
+    
+    void FillBlockerDDL()
+    {
+        answerBlockDDL.ClearOptions();
+        List<string> propsStrings = new List<string>();
+        propsStrings.Add("NONE");
+        PropertyList tProps = jsonReader.propList;
+        for (int i = 0; i < tProps.Property.Count; i++)
+        {
+            propsStrings.Add(tProps.Property[i].property_name);
+        }
+        answerBlockDDL.AddOptions(propsStrings);
+    }
+
     /// <JSON RELATED CODE>
     public void ExportJSON()
     {

@@ -36,13 +36,14 @@ public class SerializableAnswer
     public string text;
     public int icon;
     public int next_event;
+    public SerializableStat blockCondition;
     public List<SerializableStat> SerializableStat;
     public SerializableAnswer()
     {
         SerializableStat = new List<SerializableStat>();
         name = "none";
         text = "none";
-
+        blockCondition.stat_id = -1;
     }
 }
 [System.Serializable]
