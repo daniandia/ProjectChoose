@@ -5,6 +5,7 @@
             "id": 0,
             "image_id": 0,
             "text": "Texto de prueba para ver si funciona",
+            "type": 0,
             "SerializableAnswer": [
                 {
                     "name": "answer_a",
@@ -72,6 +73,7 @@
             "id": 1,
             "image_id": 0,
             "text": "Texto de prueba para ver si enlaza con la siguiente opcion",
+            "type": 0,
             "SerializableAnswer": [
                 {
                     "name": "answer_a",
@@ -93,6 +95,7 @@
             "id": 2,
             "image_id": 0,
             "text": "fafsfsafasfsafa",
+            "type": 0,
             "SerializableAnswer": [
                 {
                     "name": "answer_a",
@@ -129,6 +132,7 @@
             "id": 3,
             "image_id": 0,
             "text": "ESO",
+            "type": 0,
             "SerializableAnswer": [
                 {
                     "name": "PRIMERA SEPUESTA",

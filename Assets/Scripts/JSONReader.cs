@@ -21,7 +21,13 @@ public struct SerializableStat {
     public int stat_id; //Reference to property ID
     public float stat_value;
     public float odds;
-
+}
+[System.Serializable]
+public enum answerType
+{
+    SIMPLE,
+    START_POINT,
+    END_NODE
 }
 [System.Serializable]
 public class SerializableAnswer
@@ -36,6 +42,7 @@ public class SerializableAnswer
         SerializableStat = new List<SerializableStat>();
         name = "none";
         text = "none";
+
     }
 }
 [System.Serializable]
@@ -44,6 +51,7 @@ public class SerializableEvent {
     public int id;
     public int image_id;
     public string text;
+    public int type;
     public List<SerializableAnswer> SerializableAnswer;
 
     public SerializableEvent()

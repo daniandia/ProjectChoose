@@ -20,6 +20,7 @@ public class EditorManager : MonoBehaviour
 
     [Header("Answer layout references")]
     public UnityEngine.UI.Dropdown answersDDL;
+    public UnityEngine.UI.Dropdown answerTypeDDL;
     public UnityEngine.UI.InputField answerName;
     public UnityEngine.UI.InputField answerText;
     public UnityEngine.UI.Dropdown answerLinkDDL;
@@ -47,8 +48,20 @@ public class EditorManager : MonoBehaviour
         InitEventDDL();
         DoSelectOptionDDL();
         ShowEventPanel();
+        InitAnswerTypeDDL();
     }
+    //Init answerTypeDDL
+    void InitAnswerTypeDDL()
+    {
+        answerTypeDDL.ClearOptions();
 
+        List<string> optList = new List<string>();
+        foreach (answerType tType in System.Enum.GetValues(typeof(answerType)))
+        {
+            optList.Add(tType.ToString());
+        }
+        answerTypeDDL.AddOptions(optList);
+    }
     /// <EVENT RELATED CODE>
     //Initialise the Event Drop Down List
     void InitEventDDL()
@@ -72,6 +85,7 @@ public class EditorManager : MonoBehaviour
         SerializableEvent tempEvent = eventList.SerializableEvent[tOpt];
         mainText.text = tempEvent.text;
         nameText.text = tempEvent.name;
+        answerTypeDDL.value = tempEvent.type;
         FillAnswerPanel(tempEvent.SerializableAnswer);
     }
     //Initialises the answer panel suing the selected reference from event DDL
