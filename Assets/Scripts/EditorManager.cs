@@ -17,10 +17,10 @@ public class EditorManager : MonoBehaviour
     public UnityEngine.UI.Dropdown ddList;
     public UnityEngine.UI.InputField mainText;
     public UnityEngine.UI.InputField nameText;
+    public UnityEngine.UI.Dropdown eventTypeDDL;
 
     [Header("Answer layout references")]
     public UnityEngine.UI.Dropdown answersDDL;
-    public UnityEngine.UI.Dropdown answerTypeDDL;
     public UnityEngine.UI.InputField answerName;
     public UnityEngine.UI.InputField answerText;
     public UnityEngine.UI.Dropdown answerLinkDDL;
@@ -39,6 +39,7 @@ public class EditorManager : MonoBehaviour
     //Internal variables
     JSONReader jsonReader; 
     EventList eventList ;  //The event structure to read/write
+    public SerializableEvent actualEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,14 +57,14 @@ public class EditorManager : MonoBehaviour
     //Init answerTypeDDL
     void InitAnswerTypeDDL()
     {
-        answerTypeDDL.ClearOptions();
+        eventTypeDDL.ClearOptions();
 
         List<string> optList = new List<string>();
         foreach (answerType tType in System.Enum.GetValues(typeof(answerType)))
         {
             optList.Add(tType.ToString());
         }
-        answerTypeDDL.AddOptions(optList);
+        eventTypeDDL.AddOptions(optList);
     }
     /// <EVENT RELATED CODE>
     //Initialise the Event Drop Down List
@@ -84,12 +85,20 @@ public class EditorManager : MonoBehaviour
     {
         int tOpt = ddList.value;
         if (tOpt >= eventList.SerializableEvent.Count)
+        {
+            actualEvent = new SerializableEvent();
+            mainText.text = "";
+            nameText.text = "NEW";
+            actualEvent.id = eventList.SerializableEvent.Count;
+            eventTypeDDL.value = 0;
+            FillAnswerPanel(actualEvent.SerializableAnswer);
             return;
-        SerializableEvent tempEvent = eventList.SerializableEvent[tOpt];
-        mainText.text = tempEvent.text;
-        nameText.text = tempEvent.name;
-        answerTypeDDL.value = tempEvent.type;
-        FillAnswerPanel(tempEvent.SerializableAnswer);
+        }
+         actualEvent = eventList.SerializableEvent[tOpt];
+        mainText.text = actualEvent.text;
+        nameText.text = actualEvent.name;
+        eventTypeDDL.value = actualEvent.type;
+        FillAnswerPanel(actualEvent.SerializableAnswer);
     }
     //Initialises the answer panel suing the selected reference from event DDL
    void FillAnswerPanel(List<SerializableAnswer> answers)
@@ -109,33 +118,33 @@ public class EditorManager : MonoBehaviour
     {
         if (UnityEditor.EditorUtility.DisplayDialog("Event  created : " + nameText.text, mainText.text, "OK", "Cancel"))
         {
-            SerializableEvent eventToSave = new SerializableEvent();
-            eventToSave.id = eventList.SerializableEvent.Count;
-            eventToSave.text = mainText.text;
-            eventToSave.name = nameText.text;
-            AddAnswersToList();
-            eventList.SerializableEvent.Add(eventToSave);
+            actualEvent.id = eventList.SerializableEvent.Count;
+            actualEvent.text = mainText.text;
+            actualEvent.name = nameText.text;
+            actualEvent.type = eventTypeDDL.value;
+            //AddAnswersToList();
+            eventList.SerializableEvent.Add(actualEvent);
             InitEventDDL();
         }
     }
     //Saves the actual event (does not create new events)
+
     public void SaveEvent()
     {
-        if (UnityEditor.EditorUtility.DisplayDialog("Event  saved : "+ nameText.text, mainText.text , "OK", "Cancel"))
+        if (actualEvent.id == eventList.SerializableEvent.Count)
+            AddEventAsNew();
+        else if (UnityEditor.EditorUtility.DisplayDialog("Event  saved : " + nameText.text, mainText.text, "OK", "Cancel"))
         {
-            SerializableEvent eventToSave = new SerializableEvent();
-            eventToSave.id = eventList.SerializableEvent.Count;
-            eventToSave.text = mainText.text;
-            eventToSave.name = nameText.text;
-            AddAnswersToList();
-            eventList.SerializableEvent[ddList.value] = eventToSave;
-            InitEventDDL();
-        }
-    }
-    //When saving or creating a new event fills the answer structure
-    void AddAnswersToList()
-    {
+            //SerializableEvent eventToSave = new SerializableEvent();
+            //actualEvent.id = eventList.SerializableEvent.Count;
+            actualEvent.text = mainText.text;
+            actualEvent.name = nameText.text;
+            actualEvent.type = eventTypeDDL.value;
+            //AddAnswersToList();
+            eventList.SerializableEvent[ddList.value] = actualEvent;
 
+        }
+        InitEventDDL();
     }
     //Deletes the current event and updates the references to this one in other events
     public void DeleteEvent()
@@ -176,12 +185,12 @@ public class EditorManager : MonoBehaviour
             FillAnswerLinkDDL();
             return;
         }
-        answerName.text = eventList.SerializableEvent[ddList.value].SerializableAnswer[answersDDL.value].name;
-        answerText.text = eventList.SerializableEvent[ddList.value].SerializableAnswer[answersDDL.value].text;
+        answerName.text = actualEvent.SerializableAnswer[answersDDL.value].name;
+        answerText.text = actualEvent.SerializableAnswer[answersDDL.value].text;
         FillAnswerLinkDDL();
-        answerLinkDDL.value = eventList.SerializableEvent[ddList.value].SerializableAnswer[answersDDL.value].next_event;
-        answerBlockDDL.value = eventList.SerializableEvent[ddList.value].SerializableAnswer[answersDDL.value].blockCondition.stat_id + 1;
-        answerBlockText.text = "" +eventList.SerializableEvent[ddList.value].SerializableAnswer[answersDDL.value].blockCondition.stat_value;
+        answerLinkDDL.value = actualEvent.SerializableAnswer[answersDDL.value].next_event;
+        answerBlockDDL.value = actualEvent.SerializableAnswer[answersDDL.value].blockCondition.stat_id + 1;
+        answerBlockText.text = "" +actualEvent.SerializableAnswer[answersDDL.value].blockCondition.stat_value;
     }
     //Fills the destiny DDL with the events in the event structure (can be heavily optimized in terms of performace)
     void FillAnswerLinkDDL()
@@ -198,20 +207,18 @@ public class EditorManager : MonoBehaviour
     }
     //Checks if the name of the answer exits and saves it as new if necessary
     public void SaveCurrentAnswer()
-    {
-      
-            SerializableEvent tEvent = eventList.SerializableEvent[ddList.value];
-            for (int i = 0; i < tEvent.SerializableAnswer.Count; i++)
+    {      
+            for (int i = 0; i < actualEvent.SerializableAnswer.Count; i++)
             {
-                if (tEvent.SerializableAnswer[i].name == answerName.text)
+                if (actualEvent.SerializableAnswer[i].name == answerName.text)
                 {
                  if (UnityEditor.EditorUtility.DisplayDialog("Answer edited : "+ answerName.text, answerText.text+"\n Link:" + answerLinkDDL.value, "OK", "Cancel"))
                     {
-                        //Save as old answer
-                        tEvent.SerializableAnswer[i].text = answerText.text;
-                        tEvent.SerializableAnswer[i].next_event = answerLinkDDL.value;
-                        tEvent.SerializableAnswer[i].blockCondition.stat_id = answerBlockDDL.value - 1;
-                        tEvent.SerializableAnswer[i].blockCondition.stat_value = int.Parse(answerBlockText.text);
+                    //Save as old answer
+                    actualEvent.SerializableAnswer[i].text = answerText.text;
+                    actualEvent.SerializableAnswer[i].next_event = answerLinkDDL.value;
+                    actualEvent.SerializableAnswer[i].blockCondition.stat_id = answerBlockDDL.value - 1;
+                    actualEvent.SerializableAnswer[i].blockCondition.stat_value = int.Parse(answerBlockText.text);
                     }
                     return;
                 }
@@ -225,8 +232,8 @@ public class EditorManager : MonoBehaviour
             tAnswer.next_event = answerLinkDDL.value;
             tAnswer.blockCondition.stat_id = answerBlockDDL.value - 1;
             tAnswer.blockCondition.stat_value = int.Parse(answerBlockText.text);
-            tEvent.SerializableAnswer.Add(tAnswer);
-            FillAnswerPanel(tEvent.SerializableAnswer);
+            actualEvent.SerializableAnswer.Add(tAnswer);
+            FillAnswerPanel(actualEvent.SerializableAnswer);
         }
     }
     void FillPropertiesDLL()
@@ -245,11 +252,11 @@ public class EditorManager : MonoBehaviour
     void FillPropertiesPanel()
     {
         propsListText.text = "";
-        if (answersDDL.value == eventList.SerializableEvent[ddList.value].SerializableAnswer.Count)
+        if (eventList.SerializableEvent.Count== ddList.value || answersDDL.value == actualEvent.SerializableAnswer.Count)
             return;
         Debug.Log("Debug: EVENTS : " + ddList.value +" ANSWERS : " + answersDDL.value);
-        if (eventList.SerializableEvent[ddList.value].SerializableAnswer.Count == 0) return;
-         List<SerializableStat> SerializableStat = eventList.SerializableEvent[ddList.value].SerializableAnswer[answersDDL.value].SerializableStat;
+        if (actualEvent.SerializableAnswer.Count == 0) return;
+         List<SerializableStat> SerializableStat = actualEvent.SerializableAnswer[answersDDL.value].SerializableStat;
          for(int i = 0; i< SerializableStat.Count; i++)
         {
             propsListText.text += "" + jsonReader.propList.Property[SerializableStat[i].stat_id].property_name + " MODIF: " + SerializableStat[i].stat_value + " ODDS: " +SerializableStat[i].odds + " \n";
@@ -264,7 +271,11 @@ public class EditorManager : MonoBehaviour
             tempStat.odds = int.Parse(propOdds.text);
             tempStat.stat_value = int.Parse(propValue.text);
             tempStat.stat_id = propertiesDDL.value;
-            jsonReader.eventList.SerializableEvent[ddList.value].SerializableAnswer[answersDDL.value].SerializableStat.Add(tempStat); 
+            if (actualEvent.SerializableAnswer.Count == 0)
+            {
+                SaveCurrentAnswer();
+            }
+            actualEvent.SerializableAnswer[answersDDL.value].SerializableStat.Add(tempStat); 
         }
         FillPropertiesPanel();
     }
