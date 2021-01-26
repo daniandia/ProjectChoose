@@ -1,89 +1,6 @@
 {
     "SerializableEvent": [
         {
-            "name": "Evento 1",
-            "id": 0,
-            "image_id": 0,
-            "text": "Texto de prueba para ver si funciona",
-            "type": 0,
-            "SerializableAnswer": [
-                {
-                    "name": "answer_a",
-                    "text": "opcion 0",
-                    "icon": 0,
-                    "next_event": 1,
-                    "blockCondition": {
-                        "stat_id": -1,
-                        "stat_value": 0.0,
-                        "odds": 0.0
-                    },
-                    "SerializableStat": [
-                        {
-                            "stat_id": 0,
-                            "stat_value": 1.0,
-                            "odds": 0.0
-                        },
-                        {
-                            "stat_id": 1,
-                            "stat_value": 2.0,
-                            "odds": 0.0
-                        },
-                        {
-                            "stat_id": 0,
-                            "stat_value": 22.0,
-                            "odds": 33.0
-                        }
-                    ]
-                },
-                {
-                    "name": "answer_b",
-                    "text": "opcion 1",
-                    "icon": 1,
-                    "next_event": 1,
-                    "blockCondition": {
-                        "stat_id": 1,
-                        "stat_value": 10.0,
-                        "odds": 0.0
-                    },
-                    "SerializableStat": [
-                        {
-                            "stat_id": 0,
-                            "stat_value": 1.0,
-                            "odds": 0.0
-                        },
-                        {
-                            "stat_id": 1,
-                            "stat_value": 2.0,
-                            "odds": 0.0
-                        }
-                    ]
-                },
-                {
-                    "name": "answer_c",
-                    "text": "opcion 2",
-                    "icon": 2,
-                    "next_event": 1,
-                    "blockCondition": {
-                        "stat_id": -1,
-                        "stat_value": 0.0,
-                        "odds": 0.0
-                    },
-                    "SerializableStat": [
-                        {
-                            "stat_id": 0,
-                            "stat_value": 1.0,
-                            "odds": 0.0
-                        },
-                        {
-                            "stat_id": 1,
-                            "stat_value": 2.0,
-                            "odds": 0.0
-                        }
-                    ]
-                }
-            ]
-        },
-        {
             "name": "Evento 2",
             "id": 1,
             "image_id": 0,
@@ -94,7 +11,7 @@
                     "name": "answer_a",
                     "text": "end game",
                     "icon": 0,
-                    "next_event": 0,
+                    "next_event": 4,
                     "blockCondition": {
                         "stat_id": -1,
                         "stat_value": 0.0,
@@ -112,7 +29,7 @@
                     "name": "answer_b",
                     "text": "block when coins",
                     "icon": 0,
-                    "next_event": 1,
+                    "next_event": 0,
                     "blockCondition": {
                         "stat_id": 0,
                         "stat_value": 20.0,
@@ -133,7 +50,7 @@
                     "name": "answer_a",
                     "text": "opcion 0",
                     "icon": 0,
-                    "next_event": 1,
+                    "next_event": 0,
                     "blockCondition": {
                         "stat_id": -1,
                         "stat_value": 0.0,
@@ -145,7 +62,7 @@
                     "name": "answer_b",
                     "text": "opcion 1",
                     "icon": 0,
-                    "next_event": 1,
+                    "next_event": 0,
                     "blockCondition": {
                         "stat_id": -1,
                         "stat_value": 0.0,
@@ -157,7 +74,7 @@
                     "name": "answer_c",
                     "text": "opcion 2",
                     "icon": 0,
-                    "next_event": 1,
+                    "next_event": 0,
                     "blockCondition": {
                         "stat_id": -1,
                         "stat_value": 0.0,
@@ -169,7 +86,7 @@
                     "name": "answer_d",
                     "text": "fasfasfas",
                     "icon": 0,
-                    "next_event": 0,
+                    "next_event": 4,
                     "blockCondition": {
                         "stat_id": -1,
                         "stat_value": 0.0,
@@ -190,7 +107,7 @@
                     "name": "PRIMERA SEPUESTA",
                     "text": "NEW TEXT",
                     "icon": 0,
-                    "next_event": 2,
+                    "next_event": 1,
                     "blockCondition": {
                         "stat_id": 0,
                         "stat_value": 20.0,
@@ -208,7 +125,7 @@
                     "name": "respuesta 2",
                     "text": "eoeoe",
                     "icon": 0,
-                    "next_event": 0,
+                    "next_event": 4,
                     "blockCondition": {
                         "stat_id": -1,
                         "stat_value": 0.0,
@@ -229,7 +146,7 @@
                     "name": "ADios",
                     "text": "agur",
                     "icon": 0,
-                    "next_event": 0,
+                    "next_event": 4,
                     "blockCondition": {
                         "stat_id": -1,
                         "stat_value": 0.0,
