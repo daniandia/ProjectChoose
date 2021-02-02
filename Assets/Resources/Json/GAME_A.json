@@ -4,7 +4,7 @@
             "name": "Evento 2",
             "id": 1,
             "image_id": 0,
-            "text": "Texto de prueba para ver si enlaza con la siguiente opcion",
+            "text": "Texto de prueba para ver si enlaza con la siguiente opcion y cosas nuvas",
             "type": 0,
             "SerializableAnswer": [
                 {
@@ -139,7 +139,34 @@
             "name": "final del juego",
             "id": 4,
             "image_id": 0,
-            "text": "agur agur betirako yeah",
+            "text": "agur agur betirako",
+            "type": 2,
+            "SerializableAnswer": [
+                {
+                    "name": "ADios",
+                    "text": "agur",
+                    "icon": 0,
+                    "next_event": 4,
+                    "blockCondition": {
+                        "stat_id": -1,
+                        "stat_value": 0.0,
+                        "odds": 0.0
+                    },
+                    "SerializableStat": [
+                        {
+                            "stat_id": 0,
+                            "stat_value": 10.0,
+                            "odds": 90.0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "final del juego",
+            "id": 4,
+            "image_id": 0,
+            "text": "agur agur betirako",
             "type": 2,
             "SerializableAnswer": [
                 {
