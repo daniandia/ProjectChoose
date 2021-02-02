@@ -1,49 +1,19 @@
 {
     "SerializableEvent": [
         {
-            "name": "Watch TV",
+            "name": "The Start",
             "id": 3,
             "image_id": 0,
-            "text": "Govtube is almost a religion...",
+            "text": "A bit of govtube after work is almost a religion for me... 90% of my reccomendations are rememberances of the mod terrorist attack though.",
             "type": 1,
             "SerializableAnswer": [
                 {
-                    "name": "PRIMERA SEPUESTA",
-                    "text": "NEW TEXT",
-                    "icon": 0,
-                    "next_event": 1,
-                    "blockCondition": {
-                        "stat_id": 0,
-                        "stat_value": 20.0,
-                        "odds": 0.0
-                    },
-                    "SerializableStat": [
-                        {
-                            "stat_id": 0,
-                            "stat_value": 50.0,
-                            "odds": 50.0
-                        }
-                    ]
-                },
-                {
-                    "name": "respuesta 2",
-                    "text": "eoeoe",
+                    "name": "Keep watching",
+                    "text": "And this night is not different...",
                     "icon": 0,
                     "next_event": 1,
                     "blockCondition": {
                         "stat_id": -1,
-                        "stat_value": 0.0,
-                        "odds": 0.0
-                    },
-                    "SerializableStat": []
-                },
-                {
-                    "name": "Keep watching",
-                    "text": "Keep watching it, bla bla",
-                    "icon": 0,
-                    "next_event": 0,
-                    "blockCondition": {
-                        "stat_id": 0,
                         "stat_value": 20.0,
                         "odds": 0.0
                     },
@@ -52,10 +22,93 @@
             ]
         },
         {
-            "name": "Hola",
-            "id": 1,
+            "name": "TV: The terrorist attack",
+            "id": 2,
             "image_id": 0,
-            "text": "que tal",
+            "text": "The government vlogger has tuned up the drama to the max. \"2476 dead. We are all still processing our fellow citizens brutal murder by crazed, heavily modified individuals...\"",
+            "type": 0,
+            "SerializableAnswer": [
+                {
+                    "name": "Keep watching",
+                    "text": "I need to know. Are there any more restrictions coming?",
+                    "icon": 0,
+                    "next_event": 3,
+                    "blockCondition": {
+                        "stat_id": -1,
+                        "stat_value": 0.0,
+                        "odds": 0.0
+                    },
+                    "SerializableStat": []
+                },
+                {
+                    "name": "Turn it off",
+                    "text": "I know what they are going to say...",
+                    "icon": 0,
+                    "next_event": 2,
+                    "blockCondition": {
+                        "stat_id": -1,
+                        "stat_value": 0.0,
+                        "odds": 0.0
+                    },
+                    "SerializableStat": []
+                }
+            ]
+        },
+        {
+            "name": "my first mod",
+            "id": 2,
+            "image_id": 0,
+            "text": "The terrorist modified, yes, and now mods are illegal. I could loose my job if they found out...",
+            "type": 0,
+            "SerializableAnswer": []
+        },
+        {
+            "name": "Keep watching",
+            "id": 3,
+            "image_id": 0,
+            "text": "TODO (long explanation of what happened according to the government)",
+            "type": 0,
+            "SerializableAnswer": [
+                {
+                    "name": "Stop watching. ",
+                    "text": "Enough. I can't watch this anymore.",
+                    "icon": 0,
+                    "next_event": 2,
+                    "blockCondition": {
+                        "stat_id": -1,
+                        "stat_value": 0.0,
+                        "odds": 0.0
+                    },
+                    "SerializableStat": []
+                }
+            ]
+        },
+        {
+            "name": "Go to bed",
+            "id": 4,
+            "image_id": 0,
+            "text": "Tomorrow I need to wake up early. I have take advantage of my office privilege.",
+            "type": 0,
+            "SerializableAnswer": [
+                {
+                    "name": "Go to bed",
+                    "text": "Go to bed",
+                    "icon": 0,
+                    "next_event": 5,
+                    "blockCondition": {
+                        "stat_id": -1,
+                        "stat_value": 0.0,
+                        "odds": 0.0
+                    },
+                    "SerializableStat": []
+                }
+            ]
+        },
+        {
+            "name": "Sleeping",
+            "id": 5,
+            "image_id": 0,
+            "text": "This night, I will dream the same dream since the attacks: My modifications, my mistakes.",
             "type": 0,
             "SerializableAnswer": []
         }
