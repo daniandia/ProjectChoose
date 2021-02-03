@@ -4,7 +4,7 @@
             "name": "The Start",
             "id": 3,
             "image_id": 0,
-            "text": "A bit of govtube after work is almost a religion for me... 90% of my reccomendations are rememberances of the mod terrorist attack though.",
+            "text": "A bit of govtube after work is the best way to chill. 90% of my reccomendations are rememberances of the mod terrorist attack though. Need to watch them.",
             "type": 1,
             "SerializableAnswer": [
                 {
@@ -60,7 +60,32 @@
             "image_id": 0,
             "text": "The terrorist modified, yes, and now mods are illegal. I could loose my job if they found out...",
             "type": 0,
-            "SerializableAnswer": []
+            "SerializableAnswer": [
+                {
+                    "name": "blood",
+                    "text": "I got an hemoglobin regulation system. I barely remember how getting tired feels like.",
+                    "icon": 0,
+                    "next_event": 0,
+                    "blockCondition": {
+                        "stat_id": -1,
+                        "stat_value": 0.0,
+                        "odds": 0.0
+                    },
+                    "SerializableStat": []
+                },
+                {
+                    "name": "empathy",
+                    "text": "I got an empathy reader. I guess I was thinking about my career.",
+                    "icon": 0,
+                    "next_event": 4,
+                    "blockCondition": {
+                        "stat_id": -1,
+                        "stat_value": 0.0,
+                        "odds": 0.0
+                    },
+                    "SerializableStat": []
+                }
+            ]
         },
         {
             "name": "Keep watching",
