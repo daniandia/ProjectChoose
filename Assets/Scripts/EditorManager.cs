@@ -128,6 +128,21 @@ public class EditorManager : MonoBehaviour
     }
     //Saves the actual event (does not create new events)
 
+    public void ChangeEventType()
+    {
+        if(eventTypeDDL.value == (int)(answerType.END_NODE))
+        {
+            answerLinkDDL.GetComponent<UnityEngine.UI.Image>().color = Color.gray;
+            answerLinkDDL.enabled = false;
+        }
+        else
+        {
+            answerLinkDDL.GetComponent<UnityEngine.UI.Image>().color = Color.white;
+            answerLinkDDL.enabled = true;
+
+        }
+    }
+
     public void SaveEvent()
     {
         if (actualEvent.id == eventList.SerializableEvent.Count)
