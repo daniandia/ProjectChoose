@@ -39,7 +39,11 @@ public class EditorEventStatsController : MonoBehaviour
     public void SelectNewProperty()
     {
         Property prop = jsonReader.propList.Property[propsDDL.value];
-        pName.text = prop.property_name;
+        if (prop.visible)
+            pName.text = "VISIBLE: ";
+        else 
+            pName.text = "HIDDEN: ";
+        pName.text += prop.property_name;
         pVal.text = ""+prop.initial_value;
         pDesc.text = prop.description;
         string referencesInEvents = "";
@@ -50,7 +54,9 @@ public class EditorEventStatsController : MonoBehaviour
                 for(int k = 0;k < jsonReader.eventList.SerializableEvent[i].SerializableAnswer[j].SerializableStat.Count; k++){
                     if (jsonReader.eventList.SerializableEvent[i].SerializableAnswer[j].SerializableStat[k].stat_id == propsDDL.value)
                     {
+                    
                         referencesInEvents += "" + jsonReader.eventList.SerializableEvent[i].name + " - " + jsonReader.eventList.SerializableEvent[i].SerializableAnswer[j].name + " : " + jsonReader.eventList.SerializableEvent[i].SerializableAnswer[j].SerializableStat[k].stat_value + " \n";
+                        
                     }
                 }
             }
@@ -91,7 +97,7 @@ public class EditorEventStatsController : MonoBehaviour
         tProperty.property_name = nameInput.text;
         tProperty.description = descriptionInput.text;
         tProperty.initial_value = int.Parse(valueInput.text);
-        tProperty.visible = visible;
+        tProperty.visible = visible.isOn;
         jsonReader.propList.Property.Add(tProperty);
         InitPropertyList();
     }

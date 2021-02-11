@@ -38,6 +38,7 @@ public class SerializableAnswer
     public int icon;
     public int next_event;
     public SerializableStat blockCondition;
+    public bool hideIfBlocked;
     public List<SerializableStat> SerializableStat;
     public SerializableAnswer()
     {
@@ -45,6 +46,7 @@ public class SerializableAnswer
         name = "none";
         text = "none";
         blockCondition.stat_id = -1;
+
     }
 }
 [System.Serializable]

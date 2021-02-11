@@ -26,6 +26,7 @@ public class EditorManager : MonoBehaviour
     public UnityEngine.UI.Dropdown answerLinkDDL;
     public UnityEngine.UI.Dropdown answerBlockDDL;
     public UnityEngine.UI.InputField answerBlockText;
+    public UnityEngine.UI.Toggle answerBlockVisible;
 
     [Header("Property layout references")]
     public UnityEngine.UI.Dropdown propertiesDDL;
@@ -212,6 +213,7 @@ public class EditorManager : MonoBehaviour
         answerLinkDDL.value = actualEvent.SerializableAnswer[answersDDL.value].next_event;
         answerBlockDDL.value = actualEvent.SerializableAnswer[answersDDL.value].blockCondition.stat_id + 1;
         answerBlockText.text = "" +actualEvent.SerializableAnswer[answersDDL.value].blockCondition.stat_value;
+        answerBlockVisible.isOn= actualEvent.SerializableAnswer[answersDDL.value].hideIfBlocked;
     }
     //Fills the destiny DDL with the events in the event structure (can be heavily optimized in terms of performace)
     void FillAnswerLinkDDL()

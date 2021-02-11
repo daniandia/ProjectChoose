@@ -44,6 +44,8 @@ public class GenBehaviourManager : MonoBehaviour
                 //LockTheAnswer
                 answerTextConts[i].transform.parent.GetComponent<Button>().enabled = false;
                 answerTextConts[i].transform.parent.GetComponent<Image>().color = Color.grey;
+                if (tEvent.SerializableAnswer[i].hideIfBlocked)
+                    answerTextConts[i].transform.parent.gameObject.SetActive(false);
             }
             else
             {

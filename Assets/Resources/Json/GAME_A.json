@@ -14,9 +14,10 @@
                     "next_event": 1,
                     "blockCondition": {
                         "stat_id": -1,
-                        "stat_value": 20.0,
+                        "stat_value": 99.0,
                         "odds": 0.0
                     },
+                    "hideIfBlocked": false,
                     "SerializableStat": []
                 }
             ]
@@ -38,6 +39,7 @@
                         "stat_value": 0.0,
                         "odds": 0.0
                     },
+                    "hideIfBlocked": false,
                     "SerializableStat": []
                 },
                 {
@@ -50,6 +52,7 @@
                         "stat_value": 0.0,
                         "odds": 0.0
                     },
+                    "hideIfBlocked": false,
                     "SerializableStat": []
                 }
             ]
@@ -71,6 +74,7 @@
                         "stat_value": 0.0,
                         "odds": 0.0
                     },
+                    "hideIfBlocked": false,
                     "SerializableStat": []
                 },
                 {
@@ -83,6 +87,7 @@
                         "stat_value": 0.0,
                         "odds": 0.0
                     },
+                    "hideIfBlocked": false,
                     "SerializableStat": []
                 }
             ]
@@ -104,6 +109,7 @@
                         "stat_value": 0.0,
                         "odds": 0.0
                     },
+                    "hideIfBlocked": false,
                     "SerializableStat": []
                 }
             ]
@@ -125,6 +131,7 @@
                         "stat_value": 0.0,
                         "odds": 0.0
                     },
+                    "hideIfBlocked": false,
                     "SerializableStat": []
                 }
             ]
@@ -135,20 +142,21 @@
             "image_id": 0,
             "text": "This night, I will dream the same dream since the attacks: My modifications, my mistakes.",
             "type": 2,
-          "SerializableAnswer": [
-            {
-              "name": "Go to bed",
-              "text": "Sleep",
-              "icon": 0,
-              "next_event": 5,
-              "blockCondition": {
-                "stat_id": -1,
-                "stat_value": 0.0,
-                "odds": 0.0
-              },
-              "SerializableStat": []
-            }
-          ]
+            "SerializableAnswer": [
+                {
+                    "name": "Go to bed",
+                    "text": "Sleep",
+                    "icon": 0,
+                    "next_event": 5,
+                    "blockCondition": {
+                        "stat_id": -1,
+                        "stat_value": 0.0,
+                        "odds": 0.0
+                    },
+                    "hideIfBlocked": false,
+                    "SerializableStat": []
+                }
+            ]
         }
     ]
 }
