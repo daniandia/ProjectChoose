@@ -3,12 +3,14 @@
         {
             "property_name": "sanity",
             "initial_value": 10,
-            "description": "The fighter is not a stable individual. He needs to keep sane in order to keep his job and thrive in the Arena."
+            "description": "The fighter is not a stable individual. He needs to keep sane in order to keep his job and thrive in the Arena.",
+            "visible": true
         },
         {
-            "property_name": "nervous system damage",
+            "property_name": "nervous damage",
             "initial_value": 0,
-            "description": "Many mods gradually severily damage the nervous system. Regular accidents can also affect it. The nervous system is very hard to repair."
+            "description": "Many mods gradually severily damage the nervous system. Regular accidents can also affect it. The nervous system is very hard to repair.",
+            "visible": true
         }
     ]
 }

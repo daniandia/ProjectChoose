@@ -8,6 +8,7 @@ public class EditorEventStatsController : MonoBehaviour
     public UnityEngine.UI.InputField nameInput;
     public UnityEngine.UI.InputField valueInput;
     public UnityEngine.UI.InputField descriptionInput;
+    public UnityEngine.UI.Toggle visible;
     [Header("Property list  references")]
     public UnityEngine.UI.Dropdown propsDDL;
     public UnityEngine.UI.Text pName;
@@ -90,6 +91,7 @@ public class EditorEventStatsController : MonoBehaviour
         tProperty.property_name = nameInput.text;
         tProperty.description = descriptionInput.text;
         tProperty.initial_value = int.Parse(valueInput.text);
+        tProperty.visible = visible;
         jsonReader.propList.Property.Add(tProperty);
         InitPropertyList();
     }

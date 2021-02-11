@@ -297,6 +297,7 @@ public class EditorManager : MonoBehaviour
             tempStat.odds = int.Parse(propOdds.text);
             tempStat.stat_value = int.Parse(propValue.text);
             tempStat.stat_id = propertiesDDL.value;
+ 
             if (actualEvent.SerializableAnswer.Count == 0)
             {
                 SaveCurrentAnswer();

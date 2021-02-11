@@ -122,7 +122,8 @@ public class GenBehaviourManager : MonoBehaviour
     {
         propsText.text = "";
         foreach (SerializableStat tStat in inGameStats)
-            propsText.text += (" - " + jsonManager.propList.Property[tStat.stat_id].property_name + " : " + tStat.stat_value+" \n");
+            if(jsonManager.propList.Property[tStat.stat_id].visible)
+                propsText.text += (" - " + jsonManager.propList.Property[tStat.stat_id].property_name + " : " + tStat.stat_value+" \n");
     }
 
     void UpdateStats(SerializableAnswer answer)

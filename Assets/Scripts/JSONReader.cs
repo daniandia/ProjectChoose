@@ -10,6 +10,7 @@ public struct Property
     public string property_name;
     public int initial_value;
     public string description;
+    public bool visible;
 }
 [System.Serializable]
 public struct PropertyList
