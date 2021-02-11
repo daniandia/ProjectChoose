@@ -73,17 +73,23 @@ public class JSONReader : MonoBehaviour
     public string jsonName;
     public EventList eventList = new EventList();
     public PropertyList propList = new PropertyList();
-
-    public string LoadResourceTextfile(string path)
+    public TextAsset finalJSON;
+    public TextAsset propsFINALJSON;
+    public string LoadResourceTextfile(string path, bool ismain = true)
     {
+        TextAsset targetFile;
 #if UNITY_ANDROID
-            string filePath = Application.persistentDataPath+"/Json/" + path.Replace(".json", "");
+        string filePath = Application.persistentDataPath+"/Json/" + path.Replace(".json", "");
+        if (ismain)
+            targetFile = finalJSON;
+        else
+            targetFile = propsFINALJSON;
 #endif
 #if UNITY_STANDALONE
         string filePath = "Json/" + path.Replace(".json", "");
-#endif
         Debug.Log("LOAD PATH : " + filePath);
-        TextAsset targetFile = Resources.Load<TextAsset>(filePath);
+        = Resources.Load<TextAsset>(filePath);
+#endif
         Debug.Log(targetFile.text);
         return targetFile.text;
     }
@@ -101,7 +107,7 @@ public class JSONReader : MonoBehaviour
     public void LoadStatJSON() {
         try
         {
-            propList = JsonUtility.FromJson<PropertyList>(LoadResourceTextfile("PROPS_" + jsonName));
+            propList = JsonUtility.FromJson<PropertyList>(LoadResourceTextfile("PROPS_" + jsonName,false));
         }
         catch (Exception ex)
         {
