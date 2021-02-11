@@ -88,7 +88,7 @@ public class JSONReader : MonoBehaviour
 #if UNITY_STANDALONE
         string filePath = "Json/" + path.Replace(".json", "");
         Debug.Log("LOAD PATH : " + filePath);
-        = Resources.Load<TextAsset>(filePath);
+       targetFile = Resources.Load<TextAsset>(filePath);
 #endif
         Debug.Log(targetFile.text);
         return targetFile.text;

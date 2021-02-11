@@ -269,6 +269,7 @@ MonoBehaviour:
   propList:
     Property: []
   finalJSON: {fileID: 4900000, guid: 8b9e0ebc3b8ab66489fa332635a329e7, type: 3}
+  propsFINALJSON: {fileID: 4900000, guid: 0df3a0597b2fed14183ebd3f4e719795, type: 3}
 --- !u!1 &204848017
 GameObject:
   m_ObjectHideFlags: 0
