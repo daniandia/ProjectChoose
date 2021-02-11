@@ -172,6 +172,7 @@ public class EditorManager : MonoBehaviour
 
     void ConfirmDeleteEvent()
     {
+        if (eventList.SerializableEvent.Count == 0) return;
         ResetAllReferences(ddList.value);
         eventList.SerializableEvent.Remove(eventList.SerializableEvent[ddList.value]);
         InitEventDDL();
