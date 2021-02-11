@@ -15,8 +15,10 @@ public class GenBehaviourManager : MonoBehaviour
         jsonManager.LoadStatJSON();
         InitialiseInGameStats();
         LoadFirstEvent();
+
+        //CameraFading.CameraFade.In();
     }
-    SerializableEvent tEvent;
+    public SerializableEvent tEvent;
 
     private void LoadFirstEvent()
     {
@@ -141,9 +143,19 @@ public class GenBehaviourManager : MonoBehaviour
     {
         if (tEvent.type == (int)(answerType.END_NODE))
         {
-            Application.Quit();
+            //Application.Quit();
+            //CameraFading.CameraFade.Out();
+            Invoke("LoadMenu", 1.1f);
             return false;
         }
         return true;
     }
+    void LoadMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
 }
+    
+   
+

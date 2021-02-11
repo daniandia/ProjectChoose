@@ -155,6 +155,7 @@ public class JSONReader : MonoBehaviour
     }
 
     public SerializableEvent GetFirstEvent(){
+        Debug.Log("LOAD FIRST JSON EVENT");
         for (int i = 0; i < eventList.SerializableEvent.Count; i++)
             if (eventList.SerializableEvent[i].type == (int)(answerType.START_POINT))
                 return eventList.SerializableEvent[i];
