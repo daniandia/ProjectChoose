@@ -234,6 +234,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb66c7415bf82544e964e3e42df7dd53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tEvent:
+    name: none
+    id: 0
+    image_id: 0
+    text: none
+    type: 0
+    SerializableAnswer: []
   eventTextCont: {fileID: 744074146}
   answerTextConts:
   - {fileID: 906409541}
@@ -261,6 +268,8 @@ MonoBehaviour:
     SerializableEvent: []
   propList:
     Property: []
+  finalJSON: {fileID: 4900000, guid: 8b9e0ebc3b8ab66489fa332635a329e7, type: 3}
+  propsFINALJSON: {fileID: 4900000, guid: 0df3a0597b2fed14183ebd3f4e719795, type: 3}
 --- !u!1 &204848017
 GameObject:
   m_ObjectHideFlags: 0

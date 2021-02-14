@@ -26,6 +26,7 @@ public class EditorManager : MonoBehaviour
     public UnityEngine.UI.Dropdown answerLinkDDL;
     public UnityEngine.UI.Dropdown answerBlockDDL;
     public UnityEngine.UI.InputField answerBlockText;
+    public UnityEngine.UI.Toggle answerBlockVisible;
 
     [Header("Property layout references")]
     public UnityEngine.UI.Dropdown propertiesDDL;
@@ -128,6 +129,21 @@ public class EditorManager : MonoBehaviour
     }
     //Saves the actual event (does not create new events)
 
+    public void ChangeEventType()
+    {
+        if(eventTypeDDL.value == (int)(answerType.END_NODE))
+        {
+            answerLinkDDL.GetComponent<UnityEngine.UI.Image>().color = Color.gray;
+            answerLinkDDL.enabled = false;
+        }
+        else
+        {
+            answerLinkDDL.GetComponent<UnityEngine.UI.Image>().color = Color.white;
+            answerLinkDDL.enabled = true;
+
+        }
+    }
+
     public void SaveEvent()
     {
         if (actualEvent.id == eventList.SerializableEvent.Count)
@@ -157,6 +173,7 @@ public class EditorManager : MonoBehaviour
 
     void ConfirmDeleteEvent()
     {
+        if (eventList.SerializableEvent.Count == 0) return;
         ResetAllReferences(ddList.value);
         eventList.SerializableEvent.Remove(eventList.SerializableEvent[ddList.value]);
         InitEventDDL();
@@ -196,6 +213,7 @@ public class EditorManager : MonoBehaviour
         answerLinkDDL.value = actualEvent.SerializableAnswer[answersDDL.value].next_event;
         answerBlockDDL.value = actualEvent.SerializableAnswer[answersDDL.value].blockCondition.stat_id + 1;
         answerBlockText.text = "" +actualEvent.SerializableAnswer[answersDDL.value].blockCondition.stat_value;
+        answerBlockVisible.isOn= actualEvent.SerializableAnswer[answersDDL.value].hideIfBlocked;
     }
     //Fills the destiny DDL with the events in the event structure (can be heavily optimized in terms of performace)
     void FillAnswerLinkDDL()
@@ -281,6 +299,7 @@ public class EditorManager : MonoBehaviour
             tempStat.odds = int.Parse(propOdds.text);
             tempStat.stat_value = int.Parse(propValue.text);
             tempStat.stat_id = propertiesDDL.value;
+ 
             if (actualEvent.SerializableAnswer.Count == 0)
             {
                 SaveCurrentAnswer();

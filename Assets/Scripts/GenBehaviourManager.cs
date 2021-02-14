@@ -15,8 +15,10 @@ public class GenBehaviourManager : MonoBehaviour
         jsonManager.LoadStatJSON();
         InitialiseInGameStats();
         LoadFirstEvent();
+
+        //CameraFading.CameraFade.In();
     }
-    SerializableEvent tEvent;
+    public SerializableEvent tEvent;
 
     private void LoadFirstEvent()
     {
@@ -42,6 +44,8 @@ public class GenBehaviourManager : MonoBehaviour
                 //LockTheAnswer
                 answerTextConts[i].transform.parent.GetComponent<Button>().enabled = false;
                 answerTextConts[i].transform.parent.GetComponent<Image>().color = Color.grey;
+                if (tEvent.SerializableAnswer[i].hideIfBlocked)
+                    answerTextConts[i].transform.parent.gameObject.SetActive(false);
             }
             else
             {
@@ -120,7 +124,8 @@ public class GenBehaviourManager : MonoBehaviour
     {
         propsText.text = "";
         foreach (SerializableStat tStat in inGameStats)
-            propsText.text += (" - " + jsonManager.propList.Property[tStat.stat_id].property_name + " : " + tStat.stat_value+" \n");
+            if(jsonManager.propList.Property[tStat.stat_id].visible)
+                propsText.text += (" - " + jsonManager.propList.Property[tStat.stat_id].property_name + " : " + tStat.stat_value+" \n");
     }
 
     void UpdateStats(SerializableAnswer answer)
@@ -141,9 +146,19 @@ public class GenBehaviourManager : MonoBehaviour
     {
         if (tEvent.type == (int)(answerType.END_NODE))
         {
-            Application.Quit();
+            //Application.Quit();
+            //CameraFading.CameraFade.Out();
+            Invoke("LoadMenu", 1.1f);
             return false;
         }
         return true;
     }
+    void LoadMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
 }
+    
+   
+

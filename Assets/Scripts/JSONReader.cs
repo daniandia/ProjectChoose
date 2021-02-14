@@ -10,6 +10,7 @@ public struct Property
     public string property_name;
     public int initial_value;
     public string description;
+    public bool visible;
 }
 [System.Serializable]
 public struct PropertyList
@@ -37,6 +38,7 @@ public class SerializableAnswer
     public int icon;
     public int next_event;
     public SerializableStat blockCondition;
+    public bool hideIfBlocked;
     public List<SerializableStat> SerializableStat;
     public SerializableAnswer()
     {
@@ -44,6 +46,7 @@ public class SerializableAnswer
         name = "none";
         text = "none";
         blockCondition.stat_id = -1;
+
     }
 }
 [System.Serializable]
@@ -73,17 +76,23 @@ public class JSONReader : MonoBehaviour
     public string jsonName;
     public EventList eventList = new EventList();
     public PropertyList propList = new PropertyList();
-
-    public string LoadResourceTextfile(string path)
+    public TextAsset finalJSON;
+    public TextAsset propsFINALJSON;
+    public string LoadResourceTextfile(string path, bool ismain = true)
     {
+        TextAsset targetFile;
 #if UNITY_ANDROID
-            string filePath = Application.persistentDataPath+"/Json/" + path.Replace(".json", "");
+        string filePath = Application.persistentDataPath+"/Json/" + path.Replace(".json", "");
+        if (ismain)
+            targetFile = finalJSON;
+        else
+            targetFile = propsFINALJSON;
 #endif
 #if UNITY_STANDALONE
         string filePath = "Json/" + path.Replace(".json", "");
-#endif
         Debug.Log("LOAD PATH : " + filePath);
-        TextAsset targetFile = Resources.Load<TextAsset>(filePath);
+       targetFile = Resources.Load<TextAsset>(filePath);
+#endif
         Debug.Log(targetFile.text);
         return targetFile.text;
     }
@@ -101,7 +110,7 @@ public class JSONReader : MonoBehaviour
     public void LoadStatJSON() {
         try
         {
-            propList = JsonUtility.FromJson<PropertyList>(LoadResourceTextfile("PROPS_" + jsonName));
+            propList = JsonUtility.FromJson<PropertyList>(LoadResourceTextfile("PROPS_" + jsonName,false));
         }
         catch (Exception ex)
         {
@@ -155,6 +164,7 @@ public class JSONReader : MonoBehaviour
     }
 
     public SerializableEvent GetFirstEvent(){
+        Debug.Log("LOAD FIRST JSON EVENT");
         for (int i = 0; i < eventList.SerializableEvent.Count; i++)
             if (eventList.SerializableEvent[i].type == (int)(answerType.START_POINT))
                 return eventList.SerializableEvent[i];
