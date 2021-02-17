@@ -9,7 +9,7 @@
             "SerializableAnswer": [
                 {
                     "name": "Keep watching",
-                    "text": "And this night is not different...",
+                    "text": "Govtube, stream \"cyborg\" terrorist attack updates",
                     "icon": 0,
                     "next_event": 1,
                     "blockCondition": {
@@ -65,10 +65,10 @@
             "type": 0,
             "SerializableAnswer": [
                 {
-                    "name": "blood",
-                    "text": "I got an hemoglobin regulation system. I barely remember how getting tired feels like.",
+                    "name": "empathy",
+                    "text": "I got an empathy reader. I can read people like open books: Facial expressions, body language, voice tone... I guess I was thinking about my career.",
                     "icon": 0,
-                    "next_event": 0,
+                    "next_event": 4,
                     "blockCondition": {
                         "stat_id": -1,
                         "stat_value": 0.0,
@@ -78,8 +78,34 @@
                     "SerializableStat": []
                 },
                 {
-                    "name": "empathy",
-                    "text": "I got an empathy reader. I guess I was thinking about my career.",
+                    "name": "kung fu",
+                    "text": "Now it feels a bit silly, but I always wanted to be the best martial artist. Now I have the weird feeling of having trained for thousands of hours on video tutorials on all relevant martial arts, and a metal ball the size of a wallnut inside my skull",
+                    "icon": 0,
+                    "next_event": 4,
+                    "blockCondition": {
+                        "stat_id": -1,
+                        "stat_value": 0.0,
+                        "odds": 0.0
+                    },
+                    "hideIfBlocked": false,
+                    "SerializableStat": []
+                },
+                {
+                    "name": "A metal arm",
+                    "text": "I got a bionic arm! Like in the ancient movies! It is so cool! And hard to hide...",
+                    "icon": 0,
+                    "next_event": 4,
+                    "blockCondition": {
+                        "stat_id": -1,
+                        "stat_value": 0.0,
+                        "odds": 0.0
+                    },
+                    "hideIfBlocked": false,
+                    "SerializableStat": []
+                },
+                {
+                    "name": "Swiftness",
+                    "text": "I sent my nervous system into overdrive with nanobots. Yes, I can move and strike inhumanly faster, but my colleagues are not inhumanly boring in meetings...",
                     "icon": 0,
                     "next_event": 4,
                     "blockCondition": {
@@ -101,7 +127,7 @@
             "SerializableAnswer": [
                 {
                     "name": "Stop watching. ",
-                    "text": "Enough. I can't watch this anymore.",
+                    "text": "Enough. I can't watch this anymore. Govtube, stop stream.",
                     "icon": 0,
                     "next_event": 2,
                     "blockCondition": {
