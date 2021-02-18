@@ -32,6 +32,7 @@ public class GenBehaviourManager : MonoBehaviour
     }
     public UnityEngine.UI.Text eventTextCont;
     public UnityEngine.UI.Text [] answerTextConts;
+    public UnityEngine.UI.Text [] answerTextTitles;
     void SetUpCanvas(SerializableEvent tEvent)
     {
         eventTextCont.text = tEvent.text;
@@ -39,7 +40,8 @@ public class GenBehaviourManager : MonoBehaviour
         {
             answerTextConts[i].transform.parent.gameObject.SetActive(true);
             answerTextConts[i].text = tEvent.SerializableAnswer[i].text;
-            if(CheckBlockCondition(tEvent.SerializableAnswer[i].blockCondition))
+            answerTextTitles[i].text = tEvent.SerializableAnswer[i].name;
+            if (CheckBlockCondition(tEvent.SerializableAnswer[i].blockCondition))
             {
                 //LockTheAnswer
                 answerTextConts[i].transform.parent.GetComponent<Button>().enabled = false;
