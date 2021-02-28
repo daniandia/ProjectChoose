@@ -19,6 +19,19 @@
                     },
                     "hideIfBlocked": false,
                     "SerializableStat": []
+                },
+                {
+                    "name": "Acceptance",
+                    "text": "Well, nothing I can do now but wait and see",
+                    "icon": 0,
+                    "next_event": 0,
+                    "blockCondition": {
+                        "stat_id": -1,
+                        "stat_value": 0.0,
+                        "odds": 0.0
+                    },
+                    "hideIfBlocked": false,
+                    "SerializableStat": []
                 }
             ]
         },
@@ -207,28 +220,6 @@
                 {
                     "name": "empathy mod dream",
                     "text": "My empathy enhancement was a constant nightmare at first...",
-                    "icon": 0,
-                    "next_event": 0,
-                    "blockCondition": {
-                        "stat_id": -1,
-                        "stat_value": 0.0,
-                        "odds": 0.0
-                    },
-                    "hideIfBlocked": false,
-                    "SerializableStat": []
-                }
-            ]
-        },
-        {
-            "name": "Keep Watching 2",
-            "id": 7,
-            "image_id": 0,
-            "text": "\"The European Federation and the Afro-American Commonwealth are hosting an emergency summit with the leaders of the body modification industry. Restrictions on past body modifications are expected to be announced in the following days...\"",
-            "type": 0,
-            "SerializableAnswer": [
-                {
-                    "name": "Outrage",
-                    "text": "Past modifications! Fuck them!",
                     "icon": 0,
                     "next_event": 0,
                     "blockCondition": {
