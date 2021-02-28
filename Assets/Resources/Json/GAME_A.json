@@ -1,20 +1,20 @@
 {
     "SerializableEvent": [
         {
-            "name": "The Start",
-            "id": 3,
+            "name": "Keep Watching 2",
+            "id": 7,
             "image_id": 0,
-            "text": "A bit of govtube after work is the best way to chill. 90% of my reccomendations are rememberances of the mod terrorist attack though. Need to watch them.",
-            "type": 1,
+            "text": "\"The European Federation and the Afro-American Commonwealth are hosting an emergency summit with the leaders of the body modification industry. Restrictions on past body modifications are expected to be announced in the following days...\"",
+            "type": 0,
             "SerializableAnswer": [
                 {
-                    "name": "Keep watching",
-                    "text": "Govtube, stream \"cyborg\" terrorist attack updates",
+                    "name": "Outrage",
+                    "text": "Past modifications! Fuck them!",
                     "icon": 0,
-                    "next_event": 1,
+                    "next_event": 0,
                     "blockCondition": {
                         "stat_id": -1,
-                        "stat_value": 99.0,
+                        "stat_value": 0.0,
                         "odds": 0.0
                     },
                     "hideIfBlocked": false,
@@ -26,7 +26,7 @@
             "name": "TV: The terrorist attack",
             "id": 2,
             "image_id": 0,
-            "text": "The government vlogger has tuned up the drama to the max. \"2476 dead. We are all still processing our fellow citizens brutal murder by crazed, heavily modified individuals...\"",
+            "text": "The government vlogger is good. She actually seems touched: \"2476 dead. We are all still processing our fellow citizens brutal murder by crazed, heavily modified terrorist...\"",
             "type": 0,
             "SerializableAnswer": [
                 {
@@ -122,7 +122,7 @@
             "name": "Keep watching",
             "id": 3,
             "image_id": 0,
-            "text": "TODO (long explanation of what happened according to the government)",
+            "text": "The vlogger repeated the mantra \"Unnarmed, but heavily modified and impossibly coordinated, the 3rd of February of 2415 between 15:02 and 15:15, several Abrahamic Fundamentalists strangled and mauled to death several random civilians and proceeded to implode in crowded urban centers, with a death toll of 2476 citizens in an impossibly coordinated terrorist attack all across the European Federation. EF and FNA leadership are expected to announce new restrictions on body modifications...\"",
             "type": 0,
             "SerializableAnswer": [
                 {
@@ -130,6 +130,19 @@
                     "text": "Enough. I can't watch this anymore. Govtube, stop stream.",
                     "icon": 0,
                     "next_event": 2,
+                    "blockCondition": {
+                        "stat_id": -1,
+                        "stat_value": 0.0,
+                        "odds": 0.0
+                    },
+                    "hideIfBlocked": false,
+                    "SerializableStat": []
+                },
+                {
+                    "name": "What restrictions?",
+                    "text": "I need to know, what is being illegalized?",
+                    "icon": 0,
+                    "next_event": 0,
                     "blockCondition": {
                         "stat_id": -1,
                         "stat_value": 0.0,
@@ -167,13 +180,57 @@
             "id": 5,
             "image_id": 0,
             "text": "This night, I will dream the same dream since the attacks: My modifications, my mistakes.",
-            "type": 2,
+            "type": 0,
             "SerializableAnswer": [
                 {
                     "name": "Go to bed",
                     "text": "Sleep",
                     "icon": 0,
-                    "next_event": 5,
+                    "next_event": 6,
+                    "blockCondition": {
+                        "stat_id": -1,
+                        "stat_value": 0.0,
+                        "odds": 0.0
+                    },
+                    "hideIfBlocked": false,
+                    "SerializableStat": []
+                }
+            ]
+        },
+        {
+            "name": "Dreaming",
+            "id": 6,
+            "image_id": 0,
+            "text": "As many other nights, I dream of the clinic. Of the pain and the recovery. Of my loneliness",
+            "type": 0,
+            "SerializableAnswer": [
+                {
+                    "name": "empathy mod dream",
+                    "text": "My empathy enhancement was a constant nightmare at first...",
+                    "icon": 0,
+                    "next_event": 0,
+                    "blockCondition": {
+                        "stat_id": -1,
+                        "stat_value": 0.0,
+                        "odds": 0.0
+                    },
+                    "hideIfBlocked": false,
+                    "SerializableStat": []
+                }
+            ]
+        },
+        {
+            "name": "Keep Watching 2",
+            "id": 7,
+            "image_id": 0,
+            "text": "\"The European Federation and the Afro-American Commonwealth are hosting an emergency summit with the leaders of the body modification industry. Restrictions on past body modifications are expected to be announced in the following days...\"",
+            "type": 0,
+            "SerializableAnswer": [
+                {
+                    "name": "Outrage",
+                    "text": "Past modifications! Fuck them!",
+                    "icon": 0,
+                    "next_event": 0,
                     "blockCondition": {
                         "stat_id": -1,
                         "stat_value": 0.0,
