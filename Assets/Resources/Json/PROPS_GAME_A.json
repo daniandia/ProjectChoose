@@ -11,6 +11,12 @@
             "initial_value": 0,
             "description": "Many mods gradually severily damage the nervous system. Regular accidents can also affect it. The nervous system is very hard to repair.",
             "visible": true
+        },
+        {
+            "property_name": "empathy mod",
+            "initial_value": 0,
+            "description": "Fighter has empathy mod",
+            "visible": true
         }
     ]
 }
