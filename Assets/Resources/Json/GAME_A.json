@@ -231,6 +231,28 @@
                     "SerializableStat": []
                 }
             ]
+        },
+        {
+            "name": "0 - The Beginning",
+            "id": 7,
+            "image_id": 0,
+            "text": "My head hurts. I think. Maybe it's just the stress from body modifications being made illegal because that bloody terrorist attack. Maybe it's because the mods affected my nervous system. Maybe this is how my new nervous system aches. So many options",
+            "type": 1,
+            "SerializableAnswer": [
+                {
+                    "name": "Need to watch govtube",
+                    "text": "\"Govtube, show me the latest on the terrorist attack\"",
+                    "icon": 0,
+                    "next_event": 0,
+                    "blockCondition": {
+                        "stat_id": -1,
+                        "stat_value": 0.0,
+                        "odds": 0.0
+                    },
+                    "hideIfBlocked": false,
+                    "SerializableStat": []
+                }
+            ]
         }
     ]
 }
